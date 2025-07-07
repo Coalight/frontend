@@ -12,7 +12,10 @@ export async function GET(req: NextRequest) {
   }
 
   const response = await fetch(`${expressApiUrl}/auth/refresh`, {
+    method: "POST",
+    body: JSON.stringify({ refreshToken }),
     headers: {
+      "Content-Type": "application/json",
       Cookie: `refreshToken=${refreshToken}`,
     },
     credentials: "include",

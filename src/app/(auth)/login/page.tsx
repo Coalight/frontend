@@ -86,7 +86,7 @@ function MainForm() {
       if (!response.ok) {
         setStatus("ERROR");
         const { error } = await response.json();
-        toast.error(error.message);
+        toast.error(error.message || "Something went wrong.");
         return;
       }
 

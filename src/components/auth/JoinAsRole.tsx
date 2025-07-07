@@ -87,7 +87,7 @@ function MainForm({ role }: { role?: "student" | "teacher" }) {
       if (!response.ok) {
         setStatus("ERROR");
         const { message } = await response.json();
-        toast.error(message);
+        toast.error(message || "Something went wrong.");
         return;
       }
 
@@ -98,7 +98,7 @@ function MainForm({ role }: { role?: "student" | "teacher" }) {
 
       // signup success
       setStatus("SUCCESS");
-      toast.success(message);
+      toast.success(message || "Signup successful!");
 
       requestFormReset();
 

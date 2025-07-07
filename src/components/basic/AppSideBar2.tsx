@@ -1,11 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { useTheme } from "next-themes";
+import Icons from "@/components/icons";
 import {
-  LayoutDashboard,
-  Folder,
-  Calendar,
   Settings,
   LifeBuoy,
   Sun,
@@ -15,9 +13,7 @@ import {
   Menu,
   X,
   User,
-  LogOut,
-  HelpCircle,
-  Sparkles,
+  Bell,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,192 +27,320 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import Logo from "../dashboard/Logo";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import {
+  toggleDesktopSidebar,
+  toggleMobileSidebar,
+  closeMobileSidebar,
+} from "@redux/features/ui/uiSlice";
+import { NavItemProps, NavItemsProps, AppSidebarProps } from "@/types";
+import Link from "next/link";
+import LogoutBtn from "../auth/LogoutBtn";
+import { useRouter } from "next/navigation";
 
-export function AppSidebar({ children }: { children: React.ReactNode }) {
-  const [collapsed, setCollapsed] = useState(true);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
+const navItems = [
+  { label: "Dashboard", Icon: Icons.dashboard, link: "/dashboard" },
+  { label: "Courses", Icon: Icons.graduateCap, link: "/courses" },
+  { label: "Projects", Icon: Icons.folder, link: "/projects" },
+  { label: "Notifications", Icon: Icons.notification, link: "/notifications" },
+  { label: "Calendar", Icon: Icons.calender, link: "/calender" },
+  { label: "Archive", Icon: Icons.archive, link: "/archive" },
+];
 
-  const toggleSidebar = () => setCollapsed(!collapsed);
-  const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
-  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+const bottomItems = [
+  { icon: Settings, label: "Settings" },
+  { icon: LifeBuoy, label: "Support" },
+];
 
-  const navItems = [
-    { icon: LayoutDashboard, label: "Dashboard" },
-    { icon: Folder, label: "Projects" },
-    { icon: Calendar, label: "Calendar" },
-  ];
-
-  const bottomItems = [
-    { icon: Settings, label: "Settings" },
-    { icon: LifeBuoy, label: "Support" },
-  ];
-
+export function AppSidebar({ children }: AppSidebarProps) {
   return (
     <div className="flex h-screen overflow-hidden bg-background">
-      {/* Desktop Sidebar (left) */}
-      <aside
-        className={`hidden md:flex flex-col border-r dark:border-gray-800 transition-all duration-300 ${
-          collapsed ? "w-16" : "w-52"
-        }`}
-      >
-        {/* App Branding */}
-        <div
-          className={`p-4 border-b dark:border-gray-800 flex items-center ${
-            collapsed ? "justify-center" : "justify-between"
-          }`}
-        >
-          <div className="flex items-center">
-            <Sparkles className="h-6 w-6 text-primary" />
-            {!collapsed && (
-              <span className="ml-2 font-semibold text-lg">Coalight</span>
-            )}
-          </div>
-        </div>
-
-        {/* Main Menu */}
-        <nav className="flex-1 p-2 space-y-1 overflow-y-auto">
-          {navItems.map((item) => (
-            <Tooltip key={item.label}>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size={collapsed ? "icon" : "default"}
-                  className={`w-full justify-start rounded-sm ${
-                    collapsed ? "justify-center" : ""
-                  }`}
-                >
-                  <item.icon className="h-4 w-4" />
-                  {!collapsed && <span className="ml-2">{item.label}</span>}
-                </Button>
-              </TooltipTrigger>
-              {collapsed && (
-                <TooltipContent side="right">
-                  <p>{item.label}</p>
-                </TooltipContent>
-              )}
-            </Tooltip>
+      <DesktopSideBar>
+        <AppBranding />
+        <NavItems>
+          {navItems.map((item, idx) => (
+            <NavItem
+              key={idx}
+              label={item.label}
+              Icon={item.Icon}
+              link={item.link}
+            />
           ))}
-        </nav>
-
-        {/* Bottom Menu */}
-        <div className="p-2 border-t dark:border-gray-800 space-y-1">
+        </NavItems>
+        <NavItems isBottomNav>
           {bottomItems.map((item) => (
-            <Tooltip key={item.label}>
-              <TooltipTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size={collapsed ? "icon" : "default"}
-                  className={`w-full justify-start rounded-sm ${
-                    collapsed ? "justify-center" : ""
-                  }`}
-                >
-                  <item.icon className="h-4 w-4" />
-                  {!collapsed && <span className="ml-2">{item.label}</span>}
-                </Button>
-              </TooltipTrigger>
-              {collapsed && (
-                <TooltipContent side="right">
-                  <p>{item.label}</p>
-                </TooltipContent>
-              )}
-            </Tooltip>
+            <NavItem label={item.label} Icon={item.icon} key={item.label} />
           ))}
-        </div>
-      </aside>
+        </NavItems>
+      </DesktopSideBar>
 
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Mobile Top Navigation */}
-        <header className="md:hidden flex flex-col border-b dark:border-gray-800">
-          {/* Top Bar with Brand and Menu Button */}
-          <div className="flex items-center justify-between p-4">
-            <div className="flex items-center">
-              <Sparkles className="h-6 w-6 text-primary" />
-              <span className="ml-2 font-semibold text-lg">Coalight</span>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Button variant="ghost" size="icon" onClick={toggleTheme}>
-                {theme === "dark" ? (
-                  <Sun className="h-5 w-5" />
-                ) : (
-                  <Moon className="h-5 w-5" />
-                )}
-              </Button>
-              <Button variant="ghost" size="sm" onClick={toggleMobileMenu}>
-                {mobileMenuOpen ? (
-                  <X className="h-5 w-5" />
-                ) : (
-                  <Menu className="h-5 w-5" />
-                )}
-              </Button>
-            </div>
-          </div>
+      <MainView>{children}</MainView>
+    </div>
+  );
+}
 
-          {/* Mobile Menu (Horizontal) */}
-          {mobileMenuOpen && (
-            <div className="px-2 pb-2 flex overflow-x-auto space-x-1">
-              {[...navItems, ...bottomItems].map((item) => (
-                <Button
-                  key={item.label}
-                  variant="ghost"
-                  size="sm"
-                  className="shrink-0 rounded-sm"
-                >
-                  <item.icon className="h-4 w-4 mr-2" />
-                  {item.label}
-                </Button>
-              ))}
-            </div>
-          )}
-        </header>
+export function DesktopSideBar({ children }: { children: ReactNode }) {
+  const isCollapsed = useAppSelector(
+    (state) => state.ui.desktop.isSideBarCollapsed
+  );
+  return (
+    <aside
+      className={`hidden md:flex flex-col border-r dark:border-gray-800 transition-all duration-300 ${
+        isCollapsed ? "w-16" : "w-52"
+      }`}
+    >
+      {children}
+    </aside>
+  );
+}
 
-        {/* Desktop Top Navigation */}
-        <nav className="hidden md:flex items-center justify-between p-2 border-b dark:border-gray-800">
-          <div className="flex items-center">
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={toggleSidebar}
-              className="rounded-sm"
-            >
-              {collapsed ? (
-                <ChevronRight className="h-4 w-4" />
-              ) : (
-                <ChevronLeft className="h-4 w-4" />
-              )}
-            </Button>
-          </div>
-          <div className="flex items-center space-x-1">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="rounded-full">
-                  <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
-                    <User className="h-4 w-4" />
-                  </div>
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
-                <DropdownMenuItem className="gap-2">
-                  <User className="h-4 w-4" />
-                  Profile
-                </DropdownMenuItem>
-                <DropdownMenuItem className="gap-2">
-                  <HelpCircle className="h-4 w-4" />
-                  Help
-                </DropdownMenuItem>
-                <DropdownMenuItem className="gap-2 text-red-500">
-                  <LogOut className="h-4 w-4" />
-                  Logout
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        </nav>
-
-        {/* Page Content */}
-        <main className="flex-1 overflow-auto p-4">{children}</main>
+export function AppBranding() {
+  const isCollapsed = useAppSelector(
+    (state) => state.ui.desktop.isSideBarCollapsed
+  );
+  return (
+    <div
+      className={`h-16 p-4 border-b dark:border-gray-800 flex items-center ${
+        isCollapsed ? "justify-center" : "justify-between"
+      }`}
+    >
+      <div className="flex items-center">
+        <Logo isCollapsed={isCollapsed} />
       </div>
     </div>
+  );
+}
+
+export function NavItems({ children, isBottomNav = false }: NavItemsProps) {
+  return isBottomNav ? (
+    <div className="p-2 border-t dark:border-gray-800 space-y-2">
+      {children}
+    </div>
+  ) : (
+    <nav className="flex-1 p-2 space-y-2 overflow-y-auto">{children}</nav>
+  );
+}
+
+export function NavItem({ label, Icon, link = "#" }: NavItemProps) {
+  const isCollapsed = useAppSelector(
+    (state) => state.ui.desktop.isSideBarCollapsed
+  );
+
+  return (
+    <Tooltip>
+      <TooltipTrigger asChild>
+        <Link href={link} passHref>
+          <Button
+            variant="ghost"
+            size={isCollapsed ? "icon" : "default"}
+            className={`w-full justify-start rounded-sm ${
+              isCollapsed ? "justify-center" : ""
+            }`}
+          >
+            <Icon className="size-5" />
+            {!isCollapsed && <span className="ml-2">{label}</span>}
+          </Button>
+        </Link>
+      </TooltipTrigger>
+      {isCollapsed && (
+        <TooltipContent side="right">
+          <p>{label}</p>
+        </TooltipContent>
+      )}
+    </Tooltip>
+  );
+}
+
+export function MainView({ children }: { children: ReactNode }) {
+  return (
+    <div className="flex-1 flex flex-col overflow-hidden relative">
+      <MobileTopNav />
+      <MobileSidebar />
+      <DesktopTopNav />
+      <MainContent>{children}</MainContent>
+    </div>
+  );
+}
+
+export function MobileTopNav() {
+  const { theme, setTheme } = useTheme();
+  const dispatch = useAppDispatch();
+  const { isSideBarOpen } = useAppSelector((state) => state.ui.mobile);
+
+  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+  const toggleMobileMenu = () => dispatch(toggleMobileSidebar());
+
+  return (
+    <header className="md:hidden flex flex-col border-b dark:border-gray-800">
+      <div className="h-16 flex items-center justify-between p-4">
+        <div className="flex items-center">
+          <Logo />
+        </div>
+        <div className="flex items-center space-x-2">
+          <Button variant="ghost" size="icon" onClick={toggleTheme}>
+            {theme === "dark" ? (
+              <Sun className="h-5 w-5" />
+            ) : (
+              <Moon className="h-5 w-5" />
+            )}
+          </Button>
+          <ProfileDropdown />
+          <Button variant="ghost" size="icon" onClick={toggleMobileMenu}>
+            {isSideBarOpen ? (
+              <X className="h-5 w-5" />
+            ) : (
+              <Menu className="h-5 w-5" />
+            )}
+          </Button>
+        </div>
+      </div>
+    </header>
+  );
+}
+
+export function DesktopTopNav() {
+  const { theme, setTheme } = useTheme();
+  const dispatch = useAppDispatch();
+  const { isSideBarCollapsed } = useAppSelector((state) => state.ui.desktop);
+  const [hasNotifications] = useState(true);
+
+  const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+  const toggleSidebar = () => dispatch(toggleDesktopSidebar());
+
+  return (
+    <nav className="hidden md:flex items-center justify-between h-16 px-4 border-b dark:border-gray-800">
+      <div className="flex items-center">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={toggleSidebar}
+          className="rounded-sm"
+        >
+          {isSideBarCollapsed ? (
+            <ChevronRight className="h-4 w-4" />
+          ) : (
+            <ChevronLeft className="h-4 w-4" />
+          )}
+        </Button>
+      </div>
+      <div className="flex items-center space-x-2">
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={toggleTheme}
+          className="rounded-full"
+        >
+          {theme === "dark" ? (
+            <Sun className="h-5 w-5" />
+          ) : (
+            <Moon className="h-5 w-5" />
+          )}
+        </Button>
+
+        <Button variant="ghost" size="icon" className="rounded-full relative">
+          <Bell className="h-5 w-5" />
+          {hasNotifications && (
+            <span className="absolute top-1 right-1 h-2 w-2 rounded-full bg-red-500"></span>
+          )}
+        </Button>
+        <ProfileDropdown />
+      </div>
+    </nav>
+  );
+}
+
+export function MainContent({ children }: { children: ReactNode }) {
+  return <main className="flex-1 overflow-auto ">{children}</main>;
+}
+
+export function MobileSidebar() {
+  const dispatch = useAppDispatch();
+  const { isSideBarOpen } = useAppSelector((state) => state.ui.mobile);
+
+  const toggleMobileMenu = () => dispatch(toggleMobileSidebar());
+  const closeMenu = () => dispatch(closeMobileSidebar());
+
+  return (
+    <div
+      className={`md:hidden fixed inset-0 z-50 transform ${
+        isSideBarOpen ? "translate-x-0" : "translate-x-full"
+      } transition-transform duration-300 ease-in-out`}
+    >
+      <div
+        className="absolute inset-0 backdrop-blur-md"
+        onClick={closeMenu}
+      ></div>
+      <div className="absolute right-0 top-0 h-full w-64 bg-background border-l dark:border-gray-800 shadow-lg flex flex-col">
+        <div className="h-16 flex items-center justify-between p-4 border-b dark:border-gray-800">
+          <span className="font-semibold text-lg">Menu</span>
+          <Button variant="ghost" size="icon" onClick={toggleMobileMenu}>
+            <X className="h-5 w-5" />
+          </Button>
+        </div>
+        <div className="flex-1 overflow-y-auto p-4 space-y-2">
+          {navItems.map((item) => (
+            <Button
+              key={item.label}
+              variant="ghost"
+              size="sm"
+              className="w-full justify-start"
+              onClick={closeMenu}
+            >
+              <item.Icon className="h-4 w-4 mr-2" />
+              {item.label}
+            </Button>
+          ))}
+        </div>
+        <div className="p-4 border-t dark:border-gray-800 space-y-2">
+          {bottomItems.map((item) => (
+            <Button
+              key={item.label}
+              variant="ghost"
+              size="sm"
+              className="w-full justify-start"
+              onClick={closeMenu}
+            >
+              <item.icon className="h-4 w-4 mr-2" />
+              {item.label}
+            </Button>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function ProfileDropdown() {
+  const router = useRouter();
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant="ghost" size="icon" className="rounded-full">
+          <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center">
+            <User className="h-4 w-4" />
+          </div>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end" className="w-48 rounded-sm">
+        <DropdownMenuItem
+          className="gap-2"
+          onClick={() => router.push("/profile")}
+        >
+          <User className="h-4 w-4" />
+          Profile
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          className="gap-2"
+          onClick={() => router.push("/settings")}
+        >
+          <Settings className="h-4 w-4" />
+          Settings
+        </DropdownMenuItem>
+        <DropdownMenuItem>
+          <LogoutBtn />
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }

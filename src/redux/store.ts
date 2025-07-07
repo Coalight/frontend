@@ -12,20 +12,24 @@ import {
 import storage from "redux-persist/lib/storage";
 
 import authReducer from "./features/auth/authSlice";
+import uiReducer from "./features/ui/uiSlice";
+import coursesReducer from "./features/courses/coursesSlice";
 
 const isDev = process.env.NODE_ENV !== "production";
 
 // Combine all slices
 const rootReducer = combineReducers({
   auth: authReducer,
+  ui: uiReducer,
+  courses: coursesReducer,
 });
 
 // Persist config
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth"],
-  version: 1, // Increment this version when you change the state structure
+  whitelist: ["auth", "ui", "courses"],
+  version: 1,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

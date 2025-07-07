@@ -3,7 +3,7 @@
 import { FiArrowRight, FiRefreshCw } from "react-icons/fi";
 import OtpInput from "@/components/form/OtpInput";
 import { cn } from "@/lib/utils";
-import { formStatus } from "@/types/auth";
+import { FormState } from "@/types/auth";
 
 interface OtpFormProps {
   otp: string[];
@@ -21,7 +21,7 @@ interface OtpFormProps {
   handleResendOtp: () => void;
   setActiveInput: (index: number) => void;
   inputRefs: (HTMLInputElement | null)[];
-  FormStatus?: formStatus;
+  FormState?: FormState;
 }
 
 export default function OtpForm({
@@ -37,7 +37,7 @@ export default function OtpForm({
   handleResendOtp,
   setActiveInput,
   inputRefs,
-  FormStatus = "IDLE",
+  FormState = "IDLE",
 }: OtpFormProps) {
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -61,7 +61,7 @@ export default function OtpForm({
 
       <button
         type="submit"
-        disabled={!isOtpComplete || FormStatus === "LOADING"}
+        disabled={!isOtpComplete || FormState === "LOADING"}
         className={cn(
           "flex w-full items-center justify-center rounded-md py-3 text-sm font-semibold text-white shadow-md transition-all",
           isOtpComplete
@@ -69,7 +69,7 @@ export default function OtpForm({
             : "bg-gray-300 cursor-not-allowed"
         )}
       >
-        {FormStatus === "LOADING" ? "Loading..." : "Verify Account"}
+        {FormState === "LOADING" ? "Loading..." : "Verify Account"}
         {isOtpComplete && <FiArrowRight className="ml-2 size-5" />}
       </button>
 

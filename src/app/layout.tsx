@@ -5,6 +5,7 @@ import "@/styles/globals.css";
 import { ReduxProvider } from "@/redux/provider";
 import { Toaster } from "@/components/ui/sonner";
 import { QueryProvider } from "@/queary/QueryProvider";
+// import { logoAscii } from "logo-ascci";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -22,6 +23,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  console.log("Welcome to Coalight!");
+  // console.log(logoAscii);
   return (
     <html lang="en" suppressHydrationWarning>
       <body

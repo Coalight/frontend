@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { verifyUser } from "@/redux/features/auth/authSlice";
 // import { useRouter } from "next/navigation";
 import { sendCodeToEmail } from "@/lib/sent-verification-code";
-import { formStatus } from "@/types/auth";
+import { FormState } from "@/types/auth";
 
 const OTP_LENGTH: number = 6;
 const OTP_RESEND_TIMEOUT = 30; // seconds
@@ -21,7 +21,7 @@ export default function OtpVerification() {
   const [activeInput, setActiveInput] = useState(0);
   const [isResendDisabled, setIsResendDisabled] = useState(true);
   const [countdown, setCountdown] = useState(OTP_RESEND_TIMEOUT);
-  const [formStatus, setFormStatus] = useState<formStatus>("IDLE");
+  const [FormState, setFormState] = useState<FormState>("IDLE");
 
   const email = useAppSelector((state) => state.auth.user?.email) || "";
 
@@ -120,7 +120,7 @@ export default function OtpVerification() {
       return toast.error("Please enter a complete OTP.");
 
     try {
-      setFormStatus("LOADING");
+      setFormState("LOADING");
       const response = await fetch("/api/verify-email/verify-code", {
         method: "POST",
         headers: {
@@ -130,7 +130,7 @@ export default function OtpVerification() {
       });
 
       if (!response.ok) {
-        setFormStatus("ERROR");
+        setFormState("ERROR");
         const { message } = await response.json();
         toast.error(message);
 
@@ -146,11 +146,11 @@ export default function OtpVerification() {
       dispatch(verifyUser());
       toast.success(message);
       setOtp(Array(OTP_LENGTH).fill(""));
-      setFormStatus("SUCCESS");
+      setFormState("SUCCESS");
       // Redirect
       // router.push("/dashboard");
     } catch (error) {
-      setFormStatus("ERROR");
+      setFormState("ERROR");
       console.error("Error verifying OTP:", error);
       toast.error("An error occurred while verifying the OTP.");
     }
@@ -172,7 +172,7 @@ export default function OtpVerification() {
         handleResendOtp={handleResendOtp}
         setActiveInput={setActiveInput}
         inputRefs={inputRefs.current}
-        FormStatus={formStatus}
+        FormState={FormState}
       />
       <OtpFooter />
     </div>
