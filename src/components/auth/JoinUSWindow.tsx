@@ -54,7 +54,7 @@ export default function RegisterPage() {
             <CardContent className="relative z-10 flex justify-center mt-4">
               <Button
                 className="w-full max-w-xs bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-600 text-white shadow-md"
-                onClick={() => router.push("/signup/student")}
+                onClick={() => router.push("/signup")}
               >
                 Join as Student
               </Button>
@@ -86,7 +86,7 @@ export default function RegisterPage() {
             <CardContent className="relative z-10 flex justify-center mt-4">
               <Button
                 className="w-full max-w-xs bg-purple-600 hover:bg-purple-700 dark:bg-purple-700 dark:hover:bg-purple-600 text-white shadow-md"
-                onClick={() => router.push("/signup/teacher")}
+                onClick={() => router.push("/signup")}
               >
                 Join as Instructor
               </Button>

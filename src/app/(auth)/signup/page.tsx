@@ -1,5 +1,5 @@
-import JoinUSWindow from "@/components/auth/JoinUSWindow";
+import SignupPage from "@/components/auth/SignUpPage";
 
 export default function RegisterPage() {
-  return <JoinUSWindow />;
+  return <SignupPage />;
 }

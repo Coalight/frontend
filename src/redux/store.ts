@@ -14,6 +14,7 @@ import storage from "redux-persist/lib/storage";
 import authReducer from "./features/auth/authSlice";
 import uiReducer from "./features/ui/uiSlice";
 import coursesReducer from "./features/courses/coursesSlice";
+import dashboardReducer from "./features/dashboard/dashboardSlice";
 
 const isDev = process.env.NODE_ENV !== "production";
 
@@ -22,14 +23,15 @@ const rootReducer = combineReducers({
   auth: authReducer,
   ui: uiReducer,
   courses: coursesReducer,
+  dashboard: dashboardReducer,
 });
 
 // Persist config
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth", "ui", "courses"],
-  version: 1,
+  whitelist: ["auth", "ui", "courses", "dashboard"],
+  version: 2,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

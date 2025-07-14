@@ -86,8 +86,8 @@ function MainForm({ role }: { role?: "student" | "teacher" }) {
 
       if (!response.ok) {
         setStatus("ERROR");
-        const { message } = await response.json();
-        toast.error(message || "Something went wrong.");
+        const { error } = await response.json();
+        toast.error(error.message || "Something went wrong.");
         return;
       }
 

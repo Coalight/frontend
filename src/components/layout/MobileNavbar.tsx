@@ -5,7 +5,7 @@ import { Sun, Moon, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { toggleMobileSidebar } from "@redux/features/ui/uiSlice";
-import Logo from "../dashboard/Logo";
+import Logo from "./Logo";
 import ProfileDropdown from "@/components/layout/ProfileDropdown";
 
 export default function MobileNavbar() {

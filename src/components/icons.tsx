@@ -8,6 +8,7 @@ import { PiArrowRightThin } from "react-icons/pi";
 import { RiHome4Line } from "react-icons/ri";
 import { LuFolderArchive, LuGraduationCap } from "react-icons/lu";
 import { MdOutlineDashboard } from "react-icons/md";
+import { IoMdClose } from "react-icons/io";
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
   size?: number;
@@ -90,12 +91,13 @@ const Icons = {
   arrowRight: withDefaultProps(PiArrowRightThin, "text-2xl"),
   home: withDefaultProps(RiHome4Line, "text-2xl"),
   cap: withDefaultProps(LuGraduationCap, "text-2xl"),
-  calender: withDefaultProps(Calendar, "text-2xl"),
+  calendar: withDefaultProps(Calendar, "text-2xl"),
   dashboard: withDefaultProps(MdOutlineDashboard, "text-2xl"),
   folder: withDefaultProps(Folder, "text-2xl"),
   notification: withDefaultProps(Bell, "text-2xl"),
   archive: withDefaultProps(LuFolderArchive, "text-2xl"),
   ai: withDefaultProps(Sparkles, "text-2xl"),
+  close: withDefaultProps(IoMdClose, "text-2xl"),
 };
 
 export default Icons;

@@ -30,3 +30,6 @@ export const selectNavigationHistory = (state: RootState) =>
   state.courses.navigationHistory;
 export const selectCurrentHistoryIndex = (state: RootState) =>
   state.courses.currentHistoryIndex;
+
+export const selectIsCourseCreationModalOpen = (state: RootState) =>
+  state.courses.isCourseCreationModalOpen;

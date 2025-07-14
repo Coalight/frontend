@@ -27,7 +27,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import Logo from "../dashboard/Logo";
+import Logo from "../layout/Logo";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import {
   toggleDesktopSidebar,
@@ -44,7 +44,7 @@ const navItems = [
   { label: "Courses", Icon: Icons.graduateCap, link: "/courses" },
   { label: "Projects", Icon: Icons.folder, link: "/projects" },
   { label: "Notifications", Icon: Icons.notification, link: "/notifications" },
-  { label: "Calendar", Icon: Icons.calender, link: "/calender" },
+  { label: "Calendar", Icon: Icons.calendar, link: "/calendar" },
   { label: "Archive", Icon: Icons.archive, link: "/archive" },
 ];
 

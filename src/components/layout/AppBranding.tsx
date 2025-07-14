@@ -1,7 +1,7 @@
 "use client";
 
 import { useAppSelector } from "@/redux/hooks";
-import Logo from "../dashboard/Logo";
+import Logo from "./Logo";
 
 export default function AppBranding() {
   const isCollapsed = useAppSelector(

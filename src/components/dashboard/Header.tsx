@@ -1,0 +1,36 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { Calendar } from "lucide-react";
+import { useAppSelector } from "@/redux/hooks";
+import { selectUser } from "@/redux/features/auth/selectors";
+import { formatLongDate, getGreeting } from "@/lib/utils";
+import NewCourseDialogBtn from "@/components/courses/NewCourseDialogBtn";
+
+export const Header = () => {
+  const user = useAppSelector(selectUser);
+  const firstName = user?.name.split(" ")[0] || "";
+  return (
+    <header className="mb-6">
+      <div className="flex flex-col space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-2xl md:text-3xl font-bold">
+              {getGreeting(firstName)}
+            </h1>
+            <p className="text-md text-muted-foreground mt-1">
+              {formatLongDate(new Date().toString())}
+            </p>
+          </div>
+          <div className="flex items-center gap-2">
+            <Button variant="outline" className="gap-2">
+              <Calendar className="h-4 w-4" />
+              <span className="hidden sm:inline">Calendar</span>
+            </Button>
+            <NewCourseDialogBtn />
+          </div>
+        </div>
+      </div>
+    </header>
+  );
+};
