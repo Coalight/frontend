@@ -21,7 +21,9 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@redux/*": ["./src/redux/*"]
+      "@redux/*": ["./src/redux/*"],
+      "@components/*": ["./src/components/*"],
+      "@api/*": ["./src/api/*"],
     }
   },
   "include": [

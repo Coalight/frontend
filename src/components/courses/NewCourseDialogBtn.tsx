@@ -2,14 +2,14 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { CourseForm } from "@/components/courses/new";
+import { CourseForm } from "@/components/courses/new/CourseForm";
 import { PlusCircle } from "lucide-react";
 import { selectIsCourseCreationModalOpen } from "@/redux/features/courses/selectors";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setIsCourseCreationModalOpen } from "@/redux/features/courses/coursesSlice";
 import Icons from "@/components/icons";
 
-export default function CreateCourseModal() {
+export  function CreateCourseModal() {
   const isModalOpen = useAppSelector(selectIsCourseCreationModalOpen);
   const dispatch = useAppDispatch();
 
@@ -40,7 +40,7 @@ export default function CreateCourseModal() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
               transition={{ type: "spring", damping: 25, stiffness: 400 }}
-              className="relative z-10 w-full max-w-2xl max-h-[90vh] overflow-hidden rounded-md p-0 border-0"
+              className="relative z-10 w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-md p-0 border-0"
             >
               <Button
                 variant="ghost"

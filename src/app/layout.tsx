@@ -4,7 +4,6 @@ import { ThemeProvider } from "next-themes";
 import "@/styles/globals.css";
 import { ReduxProvider } from "@/redux/provider";
 import { Toaster } from "@/components/ui/sonner";
-import { QueryProvider } from "@/queary/QueryProvider";
 // import { logoAscii } from "logo-ascci";
 
 const poppins = Poppins({
@@ -32,7 +31,6 @@ export default function RootLayout({
         className={`${poppins.variable} antialiased font-poppins font-normal`}
       >
         <ReduxProvider>
-          <QueryProvider>
             <ThemeProvider
               attribute="class"
               defaultTheme="dark"
@@ -43,7 +41,6 @@ export default function RootLayout({
 
               <Toaster richColors />
             </ThemeProvider>
-          </QueryProvider>
         </ReduxProvider>
       </body>
     </html>

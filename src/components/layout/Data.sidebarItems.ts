@@ -3,7 +3,6 @@ import { Settings, LifeBuoy } from "lucide-react";
 
 export const navItems = [
   { label: "Dashboard", Icon: Icons.dashboard, link: "/dashboard" },
-  { label: "Courses", Icon: Icons.graduateCap, link: "/courses" },
   { label: "Calendar", Icon: Icons.calendar, link: "/calendar" },
   { label: "Archive", Icon: Icons.archive, link: "/archive" },
   { label: "AI Assistant", Icon: Icons.ai, link: "/ai" },

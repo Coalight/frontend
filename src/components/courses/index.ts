@@ -1,0 +1,5 @@
+export * from "@/components/courses/NewCourseDialogBtn"
+export * from "@/components/courses/Header"
+export * from "@/components/courses/MainContent"
+export * from "@/components/courses/CourseList"
+export * from "@/components/courses/CourseCard"

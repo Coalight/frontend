@@ -92,7 +92,15 @@ export function CourseForm({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const formDataCopy = { ...formData, code: formData.code.toUpperCase() };
+    const trimedTitle = formData.title.trim();
+    const trimedCode = formData.code.trim().toUpperCase();
+    const trimedDescription = formData.description.trim();
+    const formDataCopy: CourseCreationFormData = {
+      ...formData,
+      title: trimedTitle,
+      code: trimedCode,
+      description: trimedDescription,
+    };
     const validationError = validateForm(formDataCopy);
     if (validationError) {
       setError(validationError);
@@ -100,8 +108,10 @@ export function CourseForm({
       return;
     }
 
-    // console.log("Submitting:", formDataCopy);
+    setError(null);
     dispatch(createNewCourse(formDataCopy));
+
+
   };
 
   return (

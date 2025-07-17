@@ -5,7 +5,7 @@ import { Calendar } from "lucide-react";
 import { useAppSelector } from "@/redux/hooks";
 import { selectUser } from "@/redux/features/auth/selectors";
 import { formatLongDate, getGreeting } from "@/lib/utils";
-import NewCourseDialogBtn from "@/components/courses/NewCourseDialogBtn";
+import {CreateCourseModal} from "@/components/courses";
 
 export const Header = () => {
   const user = useAppSelector(selectUser);
@@ -27,7 +27,7 @@ export const Header = () => {
               <Calendar className="h-4 w-4" />
               <span className="hidden sm:inline">Calendar</span>
             </Button>
-            <NewCourseDialogBtn />
+            <CreateCourseModal />
           </div>
         </div>
       </div>
