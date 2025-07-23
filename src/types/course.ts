@@ -21,3 +21,5 @@ export interface Course {
   currentUserRole?: 'STUDENT' | 'INSTRUCTOR' | 'ADMIN' | 'MODERATOR';
   totalStudents?: number;
 }
+
+export type TabType = 'main' | 'stream' | 'students' | 'instructors' | 'assignments';

@@ -51,7 +51,7 @@ export const getEnrolledCourses = createAsyncThunk(
   "courses/getEnrolledCourses",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch("/api/courses/enrolled");
+      const response = await fetch("/api/courses/all");
       if (!response.ok) {
         const res = await response.json();
         toast.error(res.message || "Failed to fetch enrolled courses.");
