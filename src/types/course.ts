@@ -22,7 +22,7 @@ export interface Course {
 }
 
 export type TabType =
-  | "main"
+  | "about"
   | "stream"
   | "students"
   | "instructors"

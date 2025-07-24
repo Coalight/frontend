@@ -1,7 +1,6 @@
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { logout } from "@/redux/features/auth/authSlice";
+import { logout, resetLogoutState } from "@/redux/features/auth/authSlice";
 import { LogOut } from "lucide-react";
 
 export default function LogoutBtn() {
@@ -9,15 +8,16 @@ export default function LogoutBtn() {
   const dispatch = useAppDispatch();
   const { logoutStatus } = useAppSelector((state) => state.auth.logout);
 
-  const handleLogout = () => {
-    dispatch(logout());
-  };
-
-  useEffect(() => {
-    if (logoutStatus === "SUCCEEDED") {
+  const handleLogout = async () => {
+    const res = await dispatch(logout());
+    const { success, error } = res.payload || {};
+    if (success) {
+      dispatch(resetLogoutState());
       router.push("/");
+    } else {
+      console.error("Logout failed:", error);
     }
-  }, [logoutStatus, router]);
+  };
 
   return (
     <button

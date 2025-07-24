@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { delay } from "@/lib/delay";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hooks";
-import { setUser } from "@/redux/features/auth/authSlice";
+import { resetLogoutState, setUser } from "@/redux/features/auth/authSlice";
 
 import InputField from "@/components/form/InputField";
 import ORLine from "@/components/form/ORLine";
@@ -99,7 +99,8 @@ function MainForm() {
       setStatus("SUCCESS");
       toast.success(message || "Login successful!");
       requestFormReset();
-
+      // previous logout state reset
+      dispatch(resetLogoutState());
       router.push("/dashboard");
     } catch (e) {
       setStatus("ERROR");

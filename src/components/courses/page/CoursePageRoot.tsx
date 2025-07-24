@@ -2,11 +2,14 @@
 
 import { Course, TabType } from "@/types/course";
 import { useState } from "react";
-import { CourseHeader,TabContent , CourseTabs} from "@/components/courses/page";
+import {
+  CourseHeader,
+  TabContent,
+  CourseTabs,
+} from "@/components/courses/page";
 
 export default function CoursePageRoot({ course }: { course: Course | null }) {
-  const [activeTab, setActiveTab] = useState<TabType>("main");
-  console.log("CoursePageRoot rendered with course:", course);
+  const [activeTab, setActiveTab] = useState<TabType>("stream");
 
   if (!course) {
     return (

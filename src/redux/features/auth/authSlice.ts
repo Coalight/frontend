@@ -11,7 +11,6 @@ interface AuthState {
   isVerified: boolean;
   user: null | { name: string; email: string };
   isAccountEnabled: boolean;
-
   logout: LogOutState;
 }
 
@@ -44,6 +43,7 @@ export const logout = createAsyncThunk(
       }
 
       toast.success(data.message || "Logged out successfully");
+
       return data;
     } catch (error) {
       let errorMessage = "An unknown error occurred during logout";
@@ -67,6 +67,10 @@ const authSlice = createSlice({
     verifyUser: (state) => {
       state.isVerified = true;
     },
+    resetLogoutState: (state) => {
+      state.logout.logoutStatus = "IDLE";
+      state.logout.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -87,5 +91,5 @@ const authSlice = createSlice({
   },
 });
 
-export const { setUser, verifyUser } = authSlice.actions;
+export const { setUser, verifyUser, resetLogoutState } = authSlice.actions;
 export default authSlice.reducer;

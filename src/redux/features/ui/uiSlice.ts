@@ -12,6 +12,9 @@ interface MobileView {
 interface UIState {
   desktop: DesktopView;
   mobile: MobileView;
+  controller: {
+    forceWindowRefresh: number;
+  };
 }
 
 const initialState: UIState = {
@@ -20,6 +23,9 @@ const initialState: UIState = {
   },
   mobile: {
     isSideBarOpen: false,
+  },
+  controller: {
+    forceWindowRefresh: 0,
   },
 };
 
@@ -36,9 +42,16 @@ const uiSlice = createSlice({
     closeMobileSidebar: (state) => {
       state.mobile.isSideBarOpen = false;
     },
+    forceRefresh: (state) => {
+      state.controller.forceWindowRefresh += 1;
+    },
   },
 });
 
-export const { toggleDesktopSidebar, toggleMobileSidebar, closeMobileSidebar } =
-  uiSlice.actions;
+export const {
+  toggleDesktopSidebar,
+  toggleMobileSidebar,
+  closeMobileSidebar,
+  forceRefresh,
+} = uiSlice.actions;
 export default uiSlice.reducer;
