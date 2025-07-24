@@ -17,8 +17,8 @@ export function CourseTabs({ activeTab, setActiveTab }: {
   setActiveTab: (tab: TabType) => void 
 }) {
   return (
-    <div className="flex flex-col mb-8">
-      <div className="flex overflow-x-auto pb-2 hide-scrollbar">
+    <div className="flex flex-col  mb-8 items-center">
+      <div className="flex overflow-hideen pb-2 hide-scrollbar">
         <div className="flex space-x-1">
           {tabs.map((tab) => (
             <button
@@ -26,7 +26,7 @@ export function CourseTabs({ activeTab, setActiveTab }: {
               onClick={() => setActiveTab(tab.id)}
               className={cn(
                 "relative px-4 py-2 rounded-lg font-medium text-sm transition-colors",
-                "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700",
+                "text-gray-700 dark:text-gray-300 ",
                 activeTab === tab.id ? "text-blue-600 dark:text-blue-400" : ""
               )}
             >

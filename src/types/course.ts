@@ -1,4 +1,4 @@
-type DayOfWeek = 'mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun';
+export type DayOfWeek = "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun";
 
 export interface Course {
   id: string;
@@ -9,17 +9,21 @@ export interface Course {
   description: string;
   credits: string;
   start_date: number | string; // Unix timestamp (number) or string representation
-  class_days: DayOfWeek[]; 
+  class_days: DayOfWeek[];
   total_students: number;
-  
- 
+
   instructor?: {
     id: string;
     name: string;
     email: string;
   };
-  currentUserRole?: 'STUDENT' | 'INSTRUCTOR' | 'ADMIN' | 'MODERATOR';
+  currentUserRole?: "STUDENT" | "INSTRUCTOR" | "ADMIN" | "MODERATOR";
   totalStudents?: number;
 }
 
-export type TabType = 'main' | 'stream' | 'students' | 'instructors' | 'assignments';
+export type TabType =
+  | "main"
+  | "stream"
+  | "students"
+  | "instructors"
+  | "assignments";

@@ -3,18 +3,18 @@ import { Course } from "@/types/course";
 import { cn } from "@/lib/utils";
 
 export function CourseInfo({ course }: { course: Course }) {
-//   const formatDays = (days: string[]) => {
-//     const dayMap: Record<string, string> = {
-//       mon: 'Monday',
-//       tue: 'Tuesday',
-//       wed: 'Wednesday',
-//       thu: 'Thursday',
-//       fri: 'Friday',
-//       sat: 'Saturday',
-//       sun: 'Sunday'
-//     };
-//     return days.map(day => dayMap[day]).join(', ');
-//   };
+  const formatDays = (days: string[]) => {
+    const dayMap: Record<string, string> = {
+      mon: 'Monday',
+      tue: 'Tuesday',
+      wed: 'Wednesday',
+      thu: 'Thursday',
+      fri: 'Friday',
+      sat: 'Saturday',
+      sun: 'Sunday'
+    };
+    return days.map(day => dayMap[day]).join(', ');
+  };
 console.log(course.class_days);
 
   return (
@@ -43,8 +43,7 @@ console.log(course.class_days);
       <div>
         <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Class Days</h3>
         <p className="text-lg font-semibold dark:text-white">
-          {/* { course.class_days.join(", ") } */}
-          Saturdayy 
+          { course.class_days.length > 0 ? formatDays(course.class_days) : "Not specified" }
         </p>
       </div>
       

@@ -2,7 +2,7 @@
 
 import { Course, TabType } from "@/types/course";
 import { useState } from "react";
-import { CourseHeader,TabContent ,CourseInfo , CourseTabs} from "@/components/courses/page";
+import { CourseHeader,TabContent , CourseTabs} from "@/components/courses/page";
 
 export default function CoursePageRoot({ course }: { course: Course | null }) {
   const [activeTab, setActiveTab] = useState<TabType>("main");
@@ -17,9 +17,8 @@ export default function CoursePageRoot({ course }: { course: Course | null }) {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className=" mx-auto px-4 py-8">
       <CourseHeader course={course} />
-      <CourseInfo course={course} />
       <CourseTabs activeTab={activeTab} setActiveTab={setActiveTab} />
       <TabContent tab={activeTab} course={course} />
     </div>
