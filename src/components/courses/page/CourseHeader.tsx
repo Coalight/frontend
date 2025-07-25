@@ -1,9 +1,10 @@
 import { motion } from "framer-motion";
 import { Course } from "@/types/course";
-import { BookOpen, CalendarDays, Settings, Star } from "lucide-react";
+import { BookOpen, CalendarDays, Star } from "lucide-react";
 import { GradientLine2 } from "@/components/ui/GradientLine2";
 import { DayOfWeek } from "@/types/course";
 import { cn } from "@/lib/utils";
+import { HeaderAction } from "./HeaderAction";
 export function CourseHeader({ course }: { course: Course }) {
   return (
     <motion.div
@@ -15,7 +16,11 @@ export function CourseHeader({ course }: { course: Course }) {
       {/* Main Header */}
 
       <CourseHeaderContent>
-        <CourseTitle title={course.title} />
+        <div className="relative w-full">
+          <CourseTitle title={course.title} />
+          <HeaderAction />
+        </div>
+
         <CourseHeaderMacro>
           <CourseCode courseCode={course.code} />
           <CourseCredits credits={course.credits} />
@@ -24,7 +29,6 @@ export function CourseHeader({ course }: { course: Course }) {
       </CourseHeaderContent>
 
       {/* settings btn  */}
-      <CourseSettings />
 
       {/* GradientLine component */}
       <GradientLine2 className="mt-8 pb-5" />
@@ -102,14 +106,6 @@ function CourseSchedule({ schedule }: { schedule: DayOfWeek[] }) {
         />
       </div>
     )
-  );
-}
-
-function CourseSettings() {
-  return (
-    <button className="p-2 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300 transition-colors absolute top-2 right-8">
-      <Settings className="h-5 w-5" />
-    </button>
   );
 }
 

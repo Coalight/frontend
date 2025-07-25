@@ -25,5 +25,5 @@ export type TabType =
   | "about"
   | "stream"
   | "students"
-  | "instructors"
+  | "peoples"
   | "assignments";

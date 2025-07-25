@@ -10,18 +10,18 @@ import CoursePageRoot from "@/components/courses/page/CoursePageRoot";
 export default function CoursePage() {
   const params = useParams();
   const router = useRouter();
-  const courseId = params.id as string; 
+  const courseId = params.id as string;
   const courses = useAppSelector(selectCourses);
   const course = courses?.find((c) => c.id === courseId);
 
- useEffect(() => {
+  useEffect(() => {
     if (!course) {
-      router.replace("/not-found"); 
+      router.replace("/not-found");
     }
   }, [course, router]);
 
   if (!course) {
-    return <Loading />; 
+    return <Loading />;
   }
 
   return <CoursePageRoot course={course} />;

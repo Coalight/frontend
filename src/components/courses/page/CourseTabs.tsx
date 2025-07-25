@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 const tabs: { id: TabType; label: string }[] = [
   { id: "stream", label: "Stream" },
   { id: "students", label: "Students" },
-  { id: "instructors", label: "Instructors" },
+  { id: "peoples", label: "Peolples" },
   { id: "assignments", label: "Assignments" },
   { id: "about", label: "About" },
 ];
