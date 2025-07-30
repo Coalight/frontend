@@ -6,10 +6,11 @@ import { cn } from "@/lib/utils";
 
 const tabs: { id: TabType; label: string }[] = [
   { id: "stream", label: "Stream" },
-  { id: "students", label: "Students" },
+  { id: "events", label: "Events" },
+  { id: "assets", label: "Assets" },
   { id: "peoples", label: "Peolples" },
-  { id: "assignments", label: "Assignments" },
   { id: "about", label: "About" },
+  { id: "discussions", label: "Discussions" },
 ];
 
 export function CourseTabs({

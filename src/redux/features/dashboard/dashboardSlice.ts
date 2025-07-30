@@ -15,7 +15,7 @@ export interface Event {
   date: string;
   time: string;
   type: "exam" | "lecture" | "deadline";
-  course: string;
+  courseCode: string;
   updatedAt: string;
 }
 
@@ -72,7 +72,7 @@ export const fetchUpcomingEvents = createAsyncThunk(
         date: "2023-10-10",
         time: "10:00 AM",
         type: "exam",
-        course: "MATH-101",
+        courseCode: "MATH-101",
         updatedAt: "2023-10-01T08:00:00Z",
       },
       {
@@ -81,7 +81,7 @@ export const fetchUpcomingEvents = createAsyncThunk(
         date: "2023-10-12",
         time: "2:00 PM",
         type: "lecture",
-        course: "CS-201",
+        courseCode: "CS-201",
         updatedAt: "2023-10-02T11:30:00Z",
       },
       {
@@ -90,7 +90,7 @@ export const fetchUpcomingEvents = createAsyncThunk(
         date: "2023-10-15",
         time: "5:00 PM",
         type: "deadline",
-        course: "ENG-105",
+        courseCode: "ENG-105",
         updatedAt: "2023-10-03T13:45:00Z",
       },
     ];

@@ -24,6 +24,7 @@ export interface Course {
 export type TabType =
   | "about"
   | "stream"
-  | "students"
   | "peoples"
-  | "assignments";
+  | "events"
+  | "assets"
+  | "discussions";

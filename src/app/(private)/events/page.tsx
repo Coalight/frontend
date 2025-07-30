@@ -1,5 +1,6 @@
 import React from "react";
-import { EventCard, Event } from "@/components/dashboard/EventCard";
+import { EventCard } from "@/components/events/EventCard";
+import { Event } from "@/types/event";
 
 const mockEvents: Event[] = [
   {
@@ -8,7 +9,7 @@ const mockEvents: Event[] = [
     date: "2024-07-05",
     time: "10:00 AM",
     type: "exam",
-    course: "Math 101",
+    courseCode: "Math 101",
     updatedAt: "2024-06-20T08:00:00Z",
   },
   {
@@ -17,7 +18,7 @@ const mockEvents: Event[] = [
     date: "2024-07-08",
     time: "2:00 PM",
     type: "lecture",
-    course: "History 201",
+    courseCode: "History 201",
     updatedAt: "2024-06-19T15:30:00Z",
   },
   {
@@ -26,8 +27,71 @@ const mockEvents: Event[] = [
     date: "2024-07-12",
     time: "11:59 PM",
     type: "deadline",
-    course: "Physics 301",
+    courseCode: "Physics 301",
     updatedAt: "2024-06-18T12:00:00Z",
+  },
+  {
+    id: 4,
+    title: "Team Meeting",
+    date: "2024-07-10",
+    time: "3:00 PM",
+    type: "meeting",
+    courseCode: "CS 401",
+    updatedAt: "2024-06-17T10:00:00Z",
+  },
+  {
+    id: 5,
+    title: "Workshop on Data Science",
+    date: "2024-07-15",
+    time: "1:00 PM",
+    type: "workshop",
+    courseCode: "Data Sci 101",
+    updatedAt: "2024-06-16T09:30:00Z",
+  },
+  {
+    id: 6,
+    title: "Assignment Submission",
+    date: "2024-07-20",
+    time: "5:00 PM",
+    type: "assignment",
+    courseCode: "Chemistry 201",
+    updatedAt: "2024-06-15T14:45:00Z",
+  },
+  {
+    id: 7,
+    title: "Project Presentation",
+    date: "2024-07-25",
+    time: "10:00 AM",
+    type: "presentation",
+    courseCode: "Biology 301",
+    updatedAt: "2024-06-14T11:00:00Z",
+  },
+  {
+    id: 8,
+    title: "Discussion Session",
+    date: "2024-07-30",
+    time: "4:00 PM",
+    type: "discussion",
+    courseCode: "Philosophy 101",
+    updatedAt: "2024-06-13T13:30:00Z",
+  },
+  {
+    id: 9,
+    title: "Asset Management Seminar",
+    date: "2024-08-01",
+    time: "9:00 AM",
+    type: "assets",
+    courseCode: "Finance 201",
+    updatedAt: "2024-06-12T16:00:00Z",
+  },
+  {
+    id: 10,
+    title: "Course Announcement",
+    date: "2024-08-05",
+    time: "12:00 PM",
+    type: "announcement",
+    courseCode: "English 101",
+    updatedAt: "2024-06-11T18:15:00Z",
   },
 ];
 

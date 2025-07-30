@@ -4,19 +4,21 @@ import { TabType, Course } from "@/types/course";
 import { cn } from "@/lib/utils";
 import {
   StreamTab,
-  StudentsTab,
   PeoplesTab,
-  AssignmentsTab,
+  EventsTab,
   AboutTab,
+  AssetsTab,
+  DiscussionsTab,
 } from "@/components/courses/page/tabs";
 
 // Tab content mapping
 const tabComponents: Record<TabType, React.ComponentType<any>> = {
   stream: StreamTab,
-  students: StudentsTab,
+  events: EventsTab,
+  assets: AssetsTab,
   peoples: PeoplesTab,
-  assignments: AssignmentsTab,
   about: AboutTab,
+  discussions: DiscussionsTab,
 };
 
 interface TabContentProps {
