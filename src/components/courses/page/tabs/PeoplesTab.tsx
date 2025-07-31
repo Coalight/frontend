@@ -1,39 +1,18 @@
+import { fetchCoursePeople } from "@/redux/features/courses/coursesSlice";
+import { selectCurrentCoursePeople } from "@/redux/features/courses/selectors";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { Course, EnrolledPeople } from "@/types/course";
+import { useEffect } from "react";
 import { People } from "./People";
 
-const peoples: People[] = [
-  {
-    id: "1",
-    name: "John Doe",
-    role: "instructor",
-    email: "john.doe@example.com",
-  },
-  {
-    id: "2",
-    name: "Jane Smith",
-    role: "student",
-    email: "jane.smith@example.com",
-  },
-  {
-    id: "3",
-    name: "Alice Johnson",
-    role: "student",
-    email: "alice.johnson@example.com",
-  },
-  {
-    id: "4",
-    name: "Bob Williams",
-    role: "moderator",
-    email: "bob.williams@example.com",
-  },
-  {
-    id: "5",
-    name: "Charlie Brown",
-    role: "admin",
-    email: "charlie@gmail.com",
-  },
-];
-
-export function PeoplesTab() {
+export function PeoplesTab({ course }: { course: Course }) {
+  const dispatch = useAppDispatch();
+  const peoples: EnrolledPeople[] = useAppSelector((state) =>
+    selectCurrentCoursePeople(state, course.id)
+  );
+  useEffect(() => {
+    dispatch(fetchCoursePeople(course.id));
+  }, [course.id, dispatch]);
   return (
     <div className="space-y-4 w-full">
       <div className="flex flex-col items-center justify-center  ">

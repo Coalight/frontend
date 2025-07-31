@@ -9,7 +9,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { setIsCourseCreationModalOpen } from "@/redux/features/courses/coursesSlice";
 import Icons from "@/components/icons";
 
-export  function CreateCourseModal() {
+export function CreateCourseModal() {
   const isModalOpen = useAppSelector(selectIsCourseCreationModalOpen);
   const dispatch = useAppDispatch();
 

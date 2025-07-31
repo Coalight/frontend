@@ -1,11 +1,9 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Calendar } from "lucide-react";
 import { useAppSelector } from "@/redux/hooks";
 import { selectUser } from "@/redux/features/auth/selectors";
 import { formatLongDate, getGreeting } from "@/lib/utils";
-import {CreateCourseModal} from "@/components/courses";
+import { CreateCourseModal, JoinCourseBtn } from "@/components/courses";
 
 export const Header = () => {
   const user = useAppSelector(selectUser);
@@ -23,10 +21,7 @@ export const Header = () => {
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="outline" className="gap-2">
-              <Calendar className="h-4 w-4" />
-              <span className="hidden sm:inline">Calendar</span>
-            </Button>
+            <JoinCourseBtn />
             <CreateCourseModal />
           </div>
         </div>

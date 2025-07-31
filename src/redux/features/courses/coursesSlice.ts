@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import { CourseCreationFormData, State } from "@/types";
 import { toast } from "sonner";
-import { Course } from "@/types/course";
+import { Course, EnrolledPeople } from "@/types/course";
 
 interface CoursesState {
   courses: Course[] | null;
@@ -57,12 +57,12 @@ export const getEnrolledCourses = createAsyncThunk(
         toast.error(res.message || "Failed to fetch enrolled courses.");
         return rejectWithValue(res);
       }
-      const {data , count , success} = await response.json();
-      if (!success  ) {
+      const { data, count, success } = await response.json();
+      if (!success) {
         toast.error("Failed to fetch enrolled courses.");
         return rejectWithValue("Failed to fetch enrolled courses.");
       }
-      if(count === 0) {
+      if (count === 0) {
         toast.info("You are not enrolled in any courses.");
       }
 
@@ -73,6 +73,32 @@ export const getEnrolledCourses = createAsyncThunk(
     }
   }
 );
+
+export const fetchCoursePeople = createAsyncThunk(
+  "courses/fetchCoursePeople",
+  async (courseId: string, { rejectWithValue }) => {
+    try {
+      const response = await fetch(
+        `/api/courses/info/people?courseId=${courseId}`
+      );
+      if (!response.ok) {
+        const res = await response.json();
+        toast.error(res.message || "Failed to fetch course people.");
+        return rejectWithValue(res);
+      }
+      const { data, success } = await response.json();
+      if (!success) {
+        toast.error("Failed to fetch course people.");
+        return rejectWithValue("Failed to fetch course people.");
+      }
+      return { data, courseId } as { data: EnrolledPeople[]; courseId: string };
+    } catch (error: any) {
+      toast.error("Failed to fetch course people.");
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const courseSlice = createSlice({
   name: "courses",
   initialState,
@@ -80,50 +106,65 @@ export const courseSlice = createSlice({
     setIsCourseCreationModalOpen: (state, action: PayloadAction<boolean>) => {
       state.isCourseCreationModalOpen = action.payload;
     },
-   
-   
   },
 
   extraReducers: (builder) => {
     builder
-    .addCase(
-      createNewCourse.fulfilled,
-      (state, action: PayloadAction<any>) => {
-        const { course } = action.payload;
-        if (!state.courses) {
-          state.courses = [course];
-        } else {
-          state.courses.push(course);
+      .addCase(
+        createNewCourse.fulfilled,
+        (state, action: PayloadAction<any>) => {
+          const { course } = action.payload;
+          if (!state.courses) {
+            state.courses = [course];
+          } else {
+            state.courses.push(course);
+          }
+          state.isCourseCreationModalOpen = false;
         }
-        state.isCourseCreationModalOpen = false;
-      }
-    )
-    .addCase(createNewCourse.rejected, (state) => {
-      state.new.status = "ERROR";
-      state.new.message = "Something went wrong!";
-    })
-    .addCase(createNewCourse.pending, (state) => {
-      state.new.status = "LOADING";
-    })
+      )
+      .addCase(createNewCourse.rejected, (state) => {
+        state.new.status = "ERROR";
+        state.new.message = "Something went wrong!";
+      })
+      .addCase(createNewCourse.pending, (state) => {
+        state.new.status = "LOADING";
+      })
 
-    // all courses
-    .addCase(getEnrolledCourses.fulfilled, (state, action: PayloadAction<Course[]>) => {
-      state.courses = action.payload;
-      state.fetchStatus = "SUCCESS";
-    })
-    .addCase(getEnrolledCourses.rejected, (state) => {
-      state.fetchStatus = "ERROR";
-      toast.error("Failed to fetch enrolled courses.");
-    })
-    .addCase(getEnrolledCourses.pending, (state) => {
-      state.fetchStatus = "LOADING";
-    } );
+      // all courses
+      .addCase(
+        getEnrolledCourses.fulfilled,
+        (state, action: PayloadAction<Course[]>) => {
+          state.courses = action.payload;
+          state.fetchStatus = "SUCCESS";
+        }
+      )
+      .addCase(getEnrolledCourses.rejected, (state) => {
+        state.fetchStatus = "ERROR";
+        toast.error("Failed to fetch enrolled courses.");
+      })
+      .addCase(getEnrolledCourses.pending, (state) => {
+        state.fetchStatus = "LOADING";
+      })
+
+      // fetch course people for a specific course
+      .addCase(
+        fetchCoursePeople.fulfilled,
+        (
+          state,
+          action: PayloadAction<{ data: EnrolledPeople[]; courseId: string }>
+        ) => {
+          const { data, courseId } = action.payload;
+          if (state.courses) {
+            const course = state.courses.find((c) => c.id === courseId);
+            if (course) {
+              (course as Course).Peoples = data;
+            }
+          }
+        }
+      );
   },
 });
 
-export const {
-  setIsCourseCreationModalOpen,
-
-} = courseSlice.actions;
+export const { setIsCourseCreationModalOpen } = courseSlice.actions;
 
 export default courseSlice.reducer;

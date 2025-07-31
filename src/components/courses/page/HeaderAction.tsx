@@ -33,7 +33,10 @@ export function HeaderAction() {
   };
 
   const copyJoinUrl = () => {
-    navigator.clipboard.writeText(`${window.location.origin}/join/course-id`);
+    // Extract course ID from current URL path
+    const pathSegments = window.location.pathname.split("/");
+    const courseId = pathSegments[pathSegments.length - 1];
+    navigator.clipboard.writeText(`${window.location.origin}/join/${courseId}`);
     toast.success("Join URL copied to clipboard");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
@@ -115,7 +118,9 @@ export function HeaderAction() {
                     <Label>Or share joining link</Label>
                     <div className="flex gap-2 items-center">
                       <div className="flex-1 px-3 py-2 rounded-md border border-input bg-background text-sm">
-                        {`${window.location.origin}/join/course-id`}
+                        {`${
+                          window.location.origin
+                        }/join/${window.location.pathname.split("/").pop()}`}
                       </div>
                       <Button
                         type="button"

@@ -50,13 +50,5 @@ export const validateForm = (
     return { field: "schedule", message: "Schedule is required" };
   }
 
-  // Description validation
-  if (!formData.description || formData.description.length < 20) {
-    return {
-      field: "description",
-      message: "Description must be at least 20 characters",
-    };
-  }
-
   return null;
 };

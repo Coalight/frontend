@@ -19,6 +19,9 @@ export interface Course {
   };
   currentUserRole?: "STUDENT" | "INSTRUCTOR" | "ADMIN" | "MODERATOR";
   totalStudents?: number;
+
+  Peoples?: EnrolledPeople[];
+  Events?: CourseEvent[];
 }
 
 export type TabType =
@@ -28,3 +31,23 @@ export type TabType =
   | "events"
   | "assets"
   | "discussions";
+
+export interface EnrolledPeople {
+  id: string;
+  user_id: string;
+  course_id: string;
+  role: "STUDENT" | "INSTRUCTOR" | "ADMIN" | "MODERATOR";
+  enrolled_at: Date | string; // Date object and ISO string
+  user_name: string;
+  user_email: string;
+}
+export interface CourseEvent {
+  id: string;
+  course_id: string;
+  title: string;
+  description: string;
+  start_time: Date | string; // Date object and ISO string
+  end_time: Date | string; // Date object and ISO string
+  created_at: Date | string; // Date object and ISO string
+  created_by: string;
+}
