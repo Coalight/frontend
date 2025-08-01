@@ -1,15 +1,25 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import { Course, TabType } from "@/types/course";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CourseHeader,
   TabContent,
   CourseTabs,
 } from "@/components/courses/page";
+import { useAppDispatch } from "@/redux/hooks";
+import { fetchCoursePeople } from "@/redux/features/courses/coursesSlice";
 
 export default function CoursePageRoot({ course }: { course: Course | null }) {
   const [activeTab, setActiveTab] = useState<TabType>("stream");
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    if (!course) return;
+    if (!course?.Peoples || course.Peoples.length === 0) {
+      dispatch(fetchCoursePeople(course.id));
+    }
+  }, [dispatch, course?.Peoples, course?.Peoples?.length]);
 
   if (!course) {
     return (

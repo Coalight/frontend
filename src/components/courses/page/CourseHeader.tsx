@@ -5,6 +5,7 @@ import { GradientLine2 } from "@/components/ui/GradientLine2";
 import { DayOfWeek } from "@/types/course";
 import { cn } from "@/lib/utils";
 import { HeaderAction } from "./HeaderAction";
+import { CourseJoiningLink } from "./CourseJoiningLink";
 export function CourseHeader({ course }: { course: Course }) {
   return (
     <motion.div
@@ -27,6 +28,13 @@ export function CourseHeader({ course }: { course: Course }) {
           <CourseSchedule schedule={course.class_days} />
         </CourseHeaderMacro>
       </CourseHeaderContent>
+
+      {/* joining link */}
+
+      <CourseJoiningLink
+        courseId={course.id}
+        joiningCode={course.joining_code}
+      />
 
       {/* settings btn  */}
 

@@ -1,18 +1,12 @@
-import { fetchCoursePeople } from "@/redux/features/courses/coursesSlice";
 import { selectCurrentCoursePeople } from "@/redux/features/courses/selectors";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppSelector } from "@/redux/hooks";
 import { Course, EnrolledPeople } from "@/types/course";
-import { useEffect } from "react";
 import { People } from "./People";
 
 export function PeoplesTab({ course }: { course: Course }) {
-  const dispatch = useAppDispatch();
   const peoples: EnrolledPeople[] = useAppSelector((state) =>
     selectCurrentCoursePeople(state, course.id)
   );
-  useEffect(() => {
-    dispatch(fetchCoursePeople(course.id));
-  }, [course.id, dispatch]);
   return (
     <div className="space-y-4 w-full">
       <div className="flex flex-col items-center justify-center  ">

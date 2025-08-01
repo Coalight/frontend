@@ -4,6 +4,7 @@ export interface Course {
   id: string;
   title: string;
   code: string;
+  joining_code: string;
   created_by: string;
   created_at: Date | string; // Date object and ISO string
   description: string;

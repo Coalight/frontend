@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const PRIVATE_ROUTES = ["dashboard", "courses", "settings"];
+const PRIVATE_ROUTES = ["dashboard", "courses", "settings", "join"];
 const PUBLIC_ROUTES = ["login", "signup", "about", "contact"];
 
 export function middleware(req: NextRequest) {
