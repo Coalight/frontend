@@ -15,7 +15,7 @@ import WithGoogleBtn from "@/components/form/WithGoogleBtn";
 import FormHeader from "@/components/form/FormHeader";
 import SubmitBtn from "../form/SubmitBtn";
 
-export default function SignupPage({ role }: { role?: "student" | "teacher" }) {
+export default function SignupPage() {
   return (
     <div className="mx-auto max-w-md  mt-28 min-h-screen px-4 md:px-0">
       <Card className="shadow-sm rounded-sm  bg-transparent border-2">
@@ -25,7 +25,7 @@ export default function SignupPage({ role }: { role?: "student" | "teacher" }) {
           <WithGoogleBtn />
 
           <ORLine />
-          <MainForm role={role} />
+          <MainForm />
           <FooterTxt isFromLogin={false} />
         </CardContent>
       </Card>
@@ -33,9 +33,7 @@ export default function SignupPage({ role }: { role?: "student" | "teacher" }) {
   );
 }
 
-function MainForm({ role }: { role?: "student" | "teacher" }) {
-  const btnText =
-    role === "teacher" ? "Sign up as Teacher" : "Sign up as Student";
+function MainForm() {
   const router = useRouter();
   const dispatch = useAppDispatch();
 
@@ -152,7 +150,7 @@ function MainForm({ role }: { role?: "student" | "teacher" }) {
       <SubmitBtn
         className="mt-7"
         isLoading={status == "LOADING"}
-        text={status == "LOADING" ? "Loading..." : btnText || "Sign Up"}
+        text={status == "LOADING" ? "Loading..." : "Sign Up"}
       />
     </form>
   );

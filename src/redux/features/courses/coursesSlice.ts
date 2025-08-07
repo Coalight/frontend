@@ -4,6 +4,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CourseCreationFormData, State } from "@/types";
 import { toast } from "sonner";
 import { Course, EnrolledPeople } from "@/types/course";
+import { joinCourse, JoinCourseResponse } from "./joinCourse";
 
 interface CoursesState {
   courses: Course[] | null;
@@ -106,6 +107,13 @@ export const courseSlice = createSlice({
     setIsCourseCreationModalOpen: (state, action: PayloadAction<boolean>) => {
       state.isCourseCreationModalOpen = action.payload;
     },
+    addNewEnrolledCourse: (state, action: PayloadAction<Course>) => {
+      if (!state.courses) {
+        state.courses = [action.payload];
+      } else {
+        state.courses.push(action.payload);
+      }
+    },
   },
 
   extraReducers: (builder) => {
@@ -129,6 +137,19 @@ export const courseSlice = createSlice({
       .addCase(createNewCourse.pending, (state) => {
         state.new.status = "LOADING";
       })
+      .addCase(
+        joinCourse.fulfilled,
+        (state, action: PayloadAction<JoinCourseResponse>) => {
+          const { success, course } = action.payload;
+          if (success && course) {
+            if (!state.courses) {
+              state.courses = [course];
+            } else {
+              state.courses.push(course);
+            }
+          }
+        }
+      )
 
       // all courses
       .addCase(
@@ -165,6 +186,7 @@ export const courseSlice = createSlice({
   },
 });
 
-export const { setIsCourseCreationModalOpen } = courseSlice.actions;
+export const { setIsCourseCreationModalOpen, addNewEnrolledCourse } =
+  courseSlice.actions;
 
 export default courseSlice.reducer;
