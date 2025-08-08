@@ -1,3 +1,5 @@
+import { CourseAsset } from "./assets";
+
 export type EventType =
   | "exam"
   | "lecture"
@@ -9,14 +11,7 @@ export type EventType =
   | "project"
   | "presentation"
   | "discussion"
-  | "assets"
   | "announcement"
-  | "slide"
-  | "file"
-  | "sheet"
-  | "link"
-  | "video"
-  | "audio"
   | "resource"
   | "reading"
   | "quiz"
@@ -24,7 +19,7 @@ export type EventType =
   | "lab"
   | "tutorial";
 
-export interface Event {
+export interface CourseEvent {
   id: string | number;
   title: string;
   date: string;
@@ -38,6 +33,6 @@ export interface Event {
 }
 
 export interface EventCardProps {
-  event: Event;
+  data: CourseEvent | CourseAsset;
   hideCourseCode?: boolean;
 }

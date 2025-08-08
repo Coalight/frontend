@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Course } from "@/types/course";
-import { Event } from "@/types/event";
 import { EventCard } from "@/components/events/EventCard";
+import { CourseAsset } from "@/types/assets";
 
-const assets: Event[] = [
+const assets: CourseAsset[] = [
   {
     id: "1",
     title: "Lecture 1 Audio",
@@ -56,7 +56,7 @@ export function AssetsTab({ course }: { course: Course }) {
         <div className="space-y-4 w-full">
           {assets.length > 0 ? (
             assets.map((asset) => (
-              <EventCard key={asset.id} event={asset} hideCourseCode />
+              <EventCard key={asset.id} data={asset} hideCourseCode />
             ))
           ) : (
             <FallBackAssets />

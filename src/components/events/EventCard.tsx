@@ -19,12 +19,10 @@ import { Badge } from "@/components/ui/badge";
 import { formatShortDate, formatTimeSince } from "@/lib/utils";
 import { ReactNode } from "react";
 import { EventCardProps, EventType } from "@/types/event";
+import { CourseAssetsType } from "@/types/assets";
 
-export const EventCard = ({
-  event,
-  hideCourseCode = false,
-}: EventCardProps) => {
-  const eventTypeClasses: Record<EventType, string> = {
+export const EventCard = ({ data, hideCourseCode = false }: EventCardProps) => {
+  const eventTypeClasses: Record<EventType | CourseAssetsType, string> = {
     exam: "bg-red-500/10 text-red-500",
     lecture: "bg-blue-500/10 text-blue-500",
     deadline: "bg-violet-500/10 text-violet-500",
@@ -51,7 +49,7 @@ export const EventCard = ({
     file: "bg-gray-400/10 text-yellow-300",
   };
 
-  const eventIcons: Record<EventType, ReactNode> = {
+  const eventIcons: Record<EventType | CourseAssetsType, ReactNode> = {
     exam: <Flag className="h-4 w-4" />,
     lecture: <GraduationCap className="h-4 w-4" />,
     deadline: <Bookmark className="h-4 w-4" />,
@@ -83,22 +81,22 @@ export const EventCard = ({
       whileHover={{ x: 2 }}
       className="p-3 rounded-md border flex items-center gap-3 hover:bg-muted/50 max-w-4xl mx-auto   cursor-pointer"
     >
-      <div className={`p-2 rounded-full ${eventTypeClasses[event.type]}`}>
-        {eventIcons[event.type]}
+      <div className={`p-2 rounded-full ${eventTypeClasses[data.type]}`}>
+        {eventIcons[data.type]}
       </div>
       <div className="flex-1">
-        <p className="text-sm font-medium">{event.title}</p>
+        <p className="text-sm font-medium">{data.title}</p>
         <div className="flex items-center gap-2 mt-1 flex-wrap">
           {!hideCourseCode && (
-            <Badge variant="outline">{event.courseCode}</Badge>
+            <Badge variant="outline">{data.courseCode}</Badge>
           )}
           <span className="text-xs text-muted-foreground">
-            {formatShortDate(event.date)} • {event.time}
+            {formatShortDate(data.date)} • {data.time}
           </span>
         </div>
       </div>
       <span className="text-xs text-muted-foreground">
-        {formatTimeSince(event.updatedAt)}
+        {formatTimeSince(data.updatedAt)}
       </span>
     </motion.div>
   );
