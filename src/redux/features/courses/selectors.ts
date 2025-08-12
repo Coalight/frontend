@@ -20,3 +20,10 @@ export const selectCurrentCoursePeople = (
   );
   return course?.Peoples || [];
 };
+
+export const selectUserRoleInCourse = (state: RootState, courseId: string) => {
+  const course = state.courses.courses?.find(
+    (course) => course.id === courseId
+  );
+  return course?.currentUserRole || null;
+};

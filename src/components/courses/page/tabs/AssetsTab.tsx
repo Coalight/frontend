@@ -1,62 +1,62 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Course } from "@/types/course";
-import { EventCard } from "@/components/events/EventCard";
-import { CourseAsset } from "@/types/assets";
+"use client";
 
-const assets: CourseAsset[] = [
-  {
-    id: "1",
-    title: "Lecture 1 Audio",
-    date: "2024-06-01",
-    time: "10:00",
-    type: "audio",
-    courseCode: "CS101",
-    updatedAt: new Date().toISOString(),
-    url: "https://example.com/audio/lecture1.mp3",
-    description: "Audio recording of Lecture 1",
-  },
-  {
-    id: "2",
-    title: "Lecture 2 Video",
-    date: "2024-06-02",
-    time: "14:00",
-    type: "video",
-    courseCode: "CS101",
-    updatedAt: new Date().toISOString(),
-    url: "https://example.com/video/lecture2.mp4",
-    description: "Video recording of Lecture 2",
-  },
-  {
-    id: "3",
-    title: "Reference Material",
-    date: "2024-06-03",
-    time: "09:30",
-    type: "link",
-    courseCode: "CS101",
-    updatedAt: new Date().toISOString(),
-    url: "https://example.com/reference",
-    description: "External reference for the course",
-  },
-  {
-    id: "4",
-    title: "Assignment PDF",
-    date: "2024-06-04",
-    time: "16:00",
-    type: "file",
-    courseCode: "CS101",
-    updatedAt: new Date().toISOString(),
-    url: "https://example.com/files/assignment1.pdf",
-    description: "Assignment 1 PDF file",
-  },
-];
+import { Course } from "@/types/course";
+import { useAssets } from "@/hooks/use-assets";
+import { AssetCard } from "@/components/assets/AssetCard";
+import { UploadAssetDialog } from "@/components/assets/upload-asset";
+import { FolderOpen, Loader2 } from "lucide-react";
+
 export function AssetsTab({ course }: { course: Course }) {
+  const { assets, loading, error, refetch, deleteAsset, canUpload, canDelete } =
+    useAssets(course.id);
+
+  const userRole = course.currentUserRole;
+  const canUploadAssets =
+    canUpload &&
+    userRole &&
+    ["ADMIN", "INSTRUCTOR", "MODERATOR"].includes(userRole);
+
+  const handleDeleteAsset = async (assetId: string | number) => {
+    try {
+      await deleteAsset(assetId);
+    } catch (error) {
+      console.error("Error deleting asset:", error);
+    }
+  };
+
+  if (loading) {
+    return <AssetsLoadingState />;
+  }
+
+  if (error) {
+    return <AssetsErrorState error={error} onRetry={refetch} />;
+  }
+
   return (
     <div className="space-y-4 w-full">
-      <div className="flex flex-col items-center justify-center  ">
+      <div className="flex flex-col items-center justify-center">
+        {canUploadAssets && (
+          <div className="w-full max-w-4xl mx-auto mb-4">
+            <div className="flex justify-end">
+              <UploadAssetDialog
+                courseId={course.id}
+                onAssetUploaded={refetch}
+              />
+            </div>
+          </div>
+        )}
+
         <div className="space-y-4 w-full">
           {assets.length > 0 ? (
             assets.map((asset) => (
-              <EventCard key={asset.id} data={asset} hideCourseCode />
+              <AssetCard
+                key={asset.id}
+                data={asset}
+                hideCourseCode
+                onDelete={canDelete ? handleDeleteAsset : undefined}
+                canDelete={canDelete}
+                userRole={userRole}
+              />
             ))
           ) : (
             <FallBackAssets />
@@ -67,34 +67,48 @@ export function AssetsTab({ course }: { course: Course }) {
   );
 }
 
+function AssetsLoadingState() {
+  return (
+    <div className="flex flex-col items-center justify-center py-12">
+      <Loader2 className="h-8 w-8 animate-spin text-muted-foreground mb-4" />
+      <p className="text-muted-foreground">Loading assets...</p>
+    </div>
+  );
+}
+
+function AssetsErrorState({
+  error,
+  onRetry,
+}: {
+  error: string;
+  onRetry: () => void;
+}) {
+  return (
+    <div className="flex flex-col items-center justify-center py-12">
+      <div className="mb-4 text-red-400">
+        <FolderOpen className="h-8 w-8" />
+      </div>
+      <p className="text-red-500 mb-2">Failed to load assets</p>
+      <p className="text-sm text-muted-foreground mb-4">{error}</p>
+      <button
+        onClick={onRetry}
+        className="text-sm text-blue-500 hover:text-blue-600"
+      >
+        Try again
+      </button>
+    </div>
+  );
+}
+
 function FallBackAssets() {
   return (
-    <div className="space-y-4">
-      <div className="flex flex-col items-center justify-center py-12 text-center">
-        <div className="mb-4 text-gray-400 dark:text-gray-500">
-          <svg
-            width="48"
-            height="48"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-          >
-            <rect
-              x="3"
-              y="7"
-              width="18"
-              height="13"
-              rx="2"
-              stroke="currentColor"
-              strokeWidth="2"
-            />
-            <path d="M16 3v4M8 3v4" stroke="currentColor" strokeWidth="2" />
-          </svg>
-        </div>
-        <p className="text-gray-500 dark:text-gray-400">
-          Recent assets and activity will appear here
-        </p>
+    <div className="flex flex-col items-center justify-center py-12">
+      <div className="mb-4 text-gray-400 dark:text-gray-500">
+        <FolderOpen className="h-8 w-8" />
       </div>
+      <p className="text-gray-500 dark:text-gray-400">
+        Assets will appear here
+      </p>
     </div>
   );
 }

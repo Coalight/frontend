@@ -64,7 +64,7 @@ export function UpcomingSections({ children }: { children?: React.ReactNode }) {
     }
     return upcomingEvents
       .slice(0, 3)
-      .map((event) => <EventCard key={event.id} event={event} />);
+      .map((event) => <EventCard key={event.id} data={event} />);
   };
   return (
     <div className="space-y-6">

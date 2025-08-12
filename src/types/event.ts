@@ -23,13 +23,15 @@ export interface CourseEvent {
   id: string | number;
   title: string;
   date: string;
-  time: string;
+  time?: string;
   type: EventType;
   courseCode: string;
-  courseId?: string;
+  courseId: string;
   updatedAt: string;
   url?: string;
   description?: string;
+  created_by_Name: string;
+  created_at: string;
 }
 
 export interface EventCardProps {

@@ -1,0 +1,36 @@
+import {
+  Plus,
+  Calendar,
+  BookOpen,
+  Briefcase,
+  Presentation,
+  Award,
+  MessageSquare,
+  Mic,
+  Users,
+  Rss,
+  ClipboardCheck,
+  FlaskConical,
+  TestTube,
+  FileText,
+  Star,
+} from "lucide-react";
+import { EventTypeOption } from "./types";
+
+export const eventTypes: EventTypeOption[] = [
+  { value: "exam", label: "Exam", icon: BookOpen },
+  { value: "assignment", label: "Assignment", icon: ClipboardCheck },
+  { value: "project", label: "Project", icon: Briefcase },
+  { value: "presentation", label: "Presentation", icon: Presentation },
+  { value: "lecture", label: "Lecture", icon: Mic },
+  { value: "meeting", label: "Meeting", icon: Users },
+  { value: "workshop", label: "Workshop", icon: Award },
+  { value: "discussion", label: "Discussion", icon: MessageSquare },
+  { value: "announcement", label: "Announcement", icon: Rss },
+  { value: "deadline", label: "Deadline", icon: Calendar },
+  { value: "quiz", label: "Quiz", icon: FileText },
+  { value: "test", label: "Test", icon: TestTube },
+  { value: "lab", label: "Lab", icon: FlaskConical },
+  { value: "tutorial", label: "Tutorial", icon: Star },
+  { value: "other", label: "Other", icon: Plus },
+];

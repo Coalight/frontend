@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Course } from "@/types/course";
-import { Event } from "@/types/event";
+import { CourseEvent } from "@/types/event";
 import { EventCard } from "@/components/events/EventCard";
-const streams: Event[] = [
+import { CourseAsset } from "@/types/assets";
+const streams: (CourseEvent | CourseAsset)[] = [
   {
     id: 1,
     title: "Midterm Exam",
@@ -101,7 +102,7 @@ export function StreamTab({ course }: { course: Course }) {
         <div className="space-y-4 w-full">
           {streams.length > 0 ? (
             streams.map((stream) => (
-              <EventCard key={stream.id} event={stream} hideCourseCode />
+              <EventCard key={stream.id} data={stream} hideCourseCode />
             ))
           ) : (
             <FallBackStream />

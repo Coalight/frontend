@@ -79,9 +79,7 @@ export const fetchCoursePeople = createAsyncThunk(
   "courses/fetchCoursePeople",
   async (courseId: string, { rejectWithValue }) => {
     try {
-      const response = await fetch(
-        `/api/courses/info/people?courseId=${courseId}`
-      );
+      const response = await fetch(`/api/courses/people?courseId=${courseId}`);
       if (!response.ok) {
         const res = await response.json();
         toast.error(res.message || "Failed to fetch course people.");
