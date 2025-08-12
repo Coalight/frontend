@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { motion } from "framer-motion";
@@ -81,11 +82,12 @@ export const EnhancedEventCard = ({
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-40">
-              {canEdit && (
+              {/* future update */}
+              {/* {canEdit && (
                 <DropdownMenuItem onClick={() => onEdit?.(data)}>
                   <Edit className="h-4 w-4 mr-2" /> Edit
                 </DropdownMenuItem>
-              )}
+              )} */}
               {canDelete && (
                 <DropdownMenuItem
                   onClick={() => onDelete?.(data.id)}

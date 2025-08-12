@@ -42,7 +42,7 @@ export function useEvents(courseId: string): UseEventsReturn {
 
   const deleteEvent = useCallback(async (eventId: string | number) => {
     try {
-      const response = await fetch(`/api/courses/events/${eventId}`, {
+      const response = await fetch(`/api/courses/events?eventId=${eventId}`, {
         method: "DELETE",
         credentials: "include",
       });
