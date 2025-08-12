@@ -1,2 +1,2 @@
 export { EnhancedEventCard } from "./EnhancedEventCard";
-export { CreateEventDialog } from "./CreateEventDialog";
+export { CreateEventDialog } from "./create-event/CreateEventDialog";

@@ -117,7 +117,7 @@ export function useAssets(courseId: string): UseAssetsReturn {
         throw err;
       }
     },
-    [canUpload]
+    [canUpload, courseId]
   );
 
   const deleteAsset = useCallback(
@@ -150,7 +150,7 @@ export function useAssets(courseId: string): UseAssetsReturn {
         throw err;
       }
     },
-    [canDelete, courseId]
+    [canDelete]
   );
 
   const refetch = useCallback(() => {

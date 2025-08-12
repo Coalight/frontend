@@ -1,11 +1,11 @@
 import { NextResponse } from "next/server";
 export async function POST(
   request: Request,
-  { params }: { params: { courseID: string } }
+  { params }: { params: Promise<{ courseID: string }> }
 ) {
   try {
     const { code } = await request.json();
-    const courseID = params.courseID;
+    const { courseID } = await params;
     const expressURL = `${process.env.EXPRESS_API_BASE_URL}/courses/join/${courseID}`;
 
     if (!code || typeof code !== "string") {

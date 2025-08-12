@@ -3,10 +3,10 @@ import { NextRequest, NextResponse } from "next/server";
 // delete specific asset
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const assetId = params.id;
+    const { id: assetId } = await context.params;
     const expressUrl = `${process.env.EXPRESS_API_BASE_URL}/assets/${assetId}`;
 
     const response = await fetch(expressUrl, {
