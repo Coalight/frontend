@@ -125,6 +125,10 @@
   button {
     @apply cursor-pointer;
   }
+  canvas {
+    pointer-events: none;
+    background: transparent !important;
+  }
 }
 
 @layer components {
