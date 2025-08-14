@@ -107,12 +107,12 @@ export const testimonials: Testimonial[] = [
 
 export const stats: Stat[] = [
   {
-    value: "50K+",
+    value: "50K",
     label: "Active Users",
     description: "Teachers & Students",
   },
   {
-    value: "1,200+",
+    value: "1100",
     label: "Schools",
     description: "Using Coalight",
   },

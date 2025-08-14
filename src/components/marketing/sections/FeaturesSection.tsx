@@ -3,76 +3,51 @@
 import { motion } from "framer-motion";
 import { features } from "../data/marketing-data";
 import FeatureCard from "../ui/FeatureCard";
-import { useTheme } from "next-themes";
 
 export default function FeaturesSection() {
-  const { theme } = useTheme();
-  const darkMode = theme === "dark";
   return (
-    <section
-      className={`py-32 relative overflow-hidden dark:bg-black bg-gray-50
-      `}
-    >
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-purple-500/10 to-pink-500/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-r from-cyan-400/10 to-blue-500/10 rounded-full blur-3xl" />
+    <section className="py-24 relative bg-gray-50 dark:bg-gray-900">
+      {/* Grid pattern background */}
+      <div className="absolute inset-0 overflow-hidden opacity-10 dark:opacity-15">
+        <div className="absolute inset-0 bg-[length:40px_40px] bg-grid-gray-800/[0.05] dark:bg-grid-white/[0.05]"></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16"
         >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-gradient-to-r from-cyan-400/10 to-purple-600/10 border border-cyan-400/20 mb-6"
-          >
-            <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
-            <span
-              className={`text-sm font-medium ${
-                darkMode ? "text-gray-300" : "text-gray-600"
-              }`}
-            >
-              Powerful Features
-            </span>
-          </motion.div>
+          <span className="inline-block px-4 py-2 rounded-full bg-gray-200 text-cyan-600 dark:bg-gray-800 dark:text-cyan-400 text-sm font-medium mb-4">
+            Powerful Features
+          </span>
 
-          <h2
-            className={`text-4xl md:text-6xl font-black mb-6 ${
-              darkMode ? "text-white" : "text-black"
-            }`}
-          >
-            Built for{" "}
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
-              Modern Education
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white">
+            Designed for{" "}
+            <span className="bg-gradient-to-r from-cyan-400 to-blue-600 bg-clip-text text-transparent">
+              Modern Learning
             </span>
           </h2>
 
-          <p
-            className={`text-xl max-w-3xl mx-auto ${
-              darkMode ? "text-gray-400" : "text-gray-600"
-            }`}
-          >
-            Experience the future of learning with AI-powered tools designed to
-            enhance collaboration, streamline workflows, and maximize
-            educational outcomes.
+          <p className="text-lg max-w-2xl mx-auto text-gray-600 dark:text-gray-300">
+            AI-enhanced tools that transform how educators teach and students
+            learn, with intuitive interfaces and powerful functionality.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-8xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => (
-            <FeatureCard
+            <motion.div
               key={feature.title}
-              feature={feature}
-              index={index}
-              darkMode={darkMode}
-            />
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <FeatureCard feature={feature} index={index} />
+            </motion.div>
           ))}
         </div>
       </div>

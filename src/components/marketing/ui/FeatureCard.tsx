@@ -7,17 +7,9 @@ import { ArrowRight, Sparkles } from "lucide-react";
 interface FeatureCardProps {
   feature: Feature;
   index: number;
-  darkMode: boolean;
 }
 
-export default function FeatureCard({
-  feature,
-  index,
-  darkMode,
-}: FeatureCardProps) {
-  // Suppress unused variable warning
-  void darkMode;
-
+export default function FeatureCard({ feature, index }: FeatureCardProps) {
   const Icon = feature.icon;
   const gradientClasses = [
     "from-blue-500 to-purple-600",
@@ -28,6 +20,8 @@ export default function FeatureCard({
     "from-indigo-500 to-purple-600",
   ];
 
+  const currentGradient = gradientClasses[index % gradientClasses.length];
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -35,100 +29,72 @@ export default function FeatureCard({
       viewport={{ once: true }}
       transition={{ delay: index * 0.1, duration: 0.6 }}
       whileHover={{
-        y: -15,
-        scale: 1.02,
+        y: -10,
         transition: { duration: 0.3 },
       }}
-      className="group relative p-8 bg-white/5 backdrop-blur-lg border border-white/10 rounded-3xl hover:border-white/20 transition-all duration-500 overflow-hidden"
+      className="group relative p-6 bg-white dark:bg-gray-800/50 backdrop-blur-lg border border-gray-200 dark:border-gray-700 rounded-xl hover:shadow-lg transition-all duration-300 overflow-hidden"
     >
-      {/* Background Gradient on Hover */}
-      <motion.div
-        className={`absolute inset-0 bg-gradient-to-br ${
-          gradientClasses[index % gradientClasses.length]
-        } opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
+      {/* Background glow on hover */}
+      <div
+        className={`absolute inset-0 bg-gradient-to-br ${currentGradient} opacity-0 group-hover:opacity-10 transition-opacity duration-500 -z-10`}
       />
 
-      {/* Floating Sparkles */}
-      <motion.div
-        animate={{
-          y: [-5, 5, -5],
-          rotate: [0, 180, 360],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: index * 0.5,
-        }}
-        className="absolute top-4 right-4 opacity-20 group-hover:opacity-60 transition-opacity duration-300"
-      >
-        <Sparkles className="w-6 h-6 text-yellow-400" />
-      </motion.div>
+      {/* Icon with gradient background */}
+      <div className="flex items-center mb-4">
+        <motion.div
+          whileHover={{ scale: 1.05 }}
+          className={`flex items-center justify-center w-12 h-12 bg-gradient-to-r ${currentGradient} rounded-lg shadow-sm`}
+        >
+          <Icon className="w-6 h-6 text-white" />
+        </motion.div>
 
-      {/* Stats Badge */}
-      <div className="absolute -top-3 -right-3">
+        {/* Stats badge */}
         <div
-          className={`px-3 py-1 rounded-full text-xs font-bold bg-gradient-to-r ${
-            gradientClasses[index % gradientClasses.length]
-          } text-white shadow-lg`}
+          className={`ml-auto px-2.5 py-1 rounded-full text-xs font-medium bg-gradient-to-r ${currentGradient} text-white`}
         >
           {feature.stats}
         </div>
       </div>
 
-      {/* Icon */}
-      <motion.div
-        whileHover={{
-          scale: 1.1,
-          rotate: 360,
-          transition: { duration: 0.6 },
-        }}
-        className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r ${
-          gradientClasses[index % gradientClasses.length]
-        } rounded-2xl mb-6 shadow-xl group-hover:shadow-2xl transition-shadow duration-300`}
-      >
-        <Icon className="w-8 h-8 text-white" />
-      </motion.div>
-
       {/* Content */}
-      <div className="relative z-10">
-        <motion.h3
-          className="text-2xl font-bold text-white mb-4 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text transition-all duration-300"
-          style={{
-            backgroundImage:
-              index % 2 === 0
-                ? "linear-gradient(to right, rgb(59 130 246), rgb(147 51 234))"
-                : "linear-gradient(to right, rgb(147 51 234), rgb(236 72 153))",
-          }}
+      <div className="relative">
+        <h3
+          className={`text-xl font-bold mb-3 bg-gradient-to-r ${currentGradient} bg-clip-text text-transparent`}
         >
           {feature.title}
-        </motion.h3>
+        </h3>
 
-        <p className="text-gray-300 leading-relaxed mb-6 group-hover:text-gray-200 transition-colors duration-300">
+        <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed mb-4">
           {feature.description}
         </p>
 
-        {/* Learn More Button */}
+        {/* Learn More link */}
         <motion.div
-          whileHover={{ x: 5 }}
-          className="flex items-center space-x-2 text-gray-400 group-hover:text-white transition-colors duration-300 cursor-pointer"
+          whileHover={{ x: 3 }}
+          className="inline-flex items-center text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
         >
-          <span className="text-sm font-semibold">Learn More</span>
-          <motion.div
-            animate={{ x: [0, 5, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <ArrowRight className="w-4 h-4" />
-          </motion.div>
+          Learn more
+          <ArrowRight className="ml-1 w-4 h-4" />
         </motion.div>
       </div>
 
-      {/* Hover Glow Effect */}
-      <motion.div
-        className={`absolute -inset-1 bg-gradient-to-r ${
-          gradientClasses[index % gradientClasses.length]
-        } rounded-3xl blur opacity-0 group-hover:opacity-20 transition-opacity duration-500 -z-10`}
-      />
+      {/* Subtle sparkle decoration */}
+      {index % 3 === 0 && (
+        <motion.div
+          animate={{
+            y: [-3, 3, -3],
+            rotate: [0, 180, 360],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="absolute top-2 right-2 opacity-30 group-hover:opacity-70 transition-opacity"
+        >
+          <Sparkles className="w-5 h-5 text-yellow-400" />
+        </motion.div>
+      )}
     </motion.div>
   );
 }
