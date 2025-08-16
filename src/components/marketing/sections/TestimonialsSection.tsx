@@ -1,20 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { testimonials } from "../data/marketing-data";
-import { Star } from "lucide-react";
 import { useTheme } from "next-themes";
+import { Marquee } from "@/components/magicui/marquee";
+import { testimonials } from "../data/marketing-data";
+import { ReviewCard } from "../ui/ReviewCard";
 
 export default function TestimonialsSection() {
   const { theme } = useTheme();
   const darkMode = theme === "dark";
+  const firstRow = testimonials.slice(0, testimonials.length / 2);
+  const secondRow = testimonials.slice(testimonials.length / 2);
   return (
-    <section
-      className={`py-20 font-[Poppins] ${
-        darkMode ? "bg-gray-900" : "bg-gray-50"
-      }`}
-    >
-      <div className="container mx-auto px-6">
+    <section className={`py-20 font-[Poppins] bg-white dark:bg-black`}>
+      <div className="mx-auto px-6 w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -26,95 +25,34 @@ export default function TestimonialsSection() {
               darkMode ? "text-white" : "text-gray-900"
             }`}
           >
-            What Teachers Say
+            Educator Testimonials
           </h2>
           <p
             className={`text-lg max-w-3xl mx-auto ${
               darkMode ? "text-gray-300" : "text-gray-600"
             }`}
           >
-            Hear from educators who use Coalight every day to make teaching
-            easier
+            Hear from educators who are transforming their classrooms with
+            Coalight
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={testimonial.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{
-                y: -5,
-                transition: { duration: 0.2 },
-              }}
-              className={`p-6 rounded-xl transition-all duration-300 ${
-                darkMode
-                  ? "bg-gray-800 border border-gray-700 hover:bg-gray-750"
-                  : "bg-white border border-gray-200 hover:bg-gray-50 shadow-sm hover:shadow-md"
-              }`}
-            >
-              {/* Rating */}
-              <div className="flex items-center space-x-1 mb-4">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star
-                    key={i}
-                    size={16}
-                    className={`fill-current ${
-                      darkMode ? "text-yellow-400" : "text-yellow-500"
-                    }`}
-                  />
-                ))}
+        {/* Improved Marquee Container */}
+        <div className="relative w-full overflow-hidden">
+          <Marquee pauseOnHover className="[--duration:55s] gap-4 py-2">
+            {firstRow.map((testimonial, idx) => (
+              <div key={idx} className="mx-2">
+                <ReviewCard {...testimonial} />
               </div>
-
-              {/* Content */}
-              <blockquote
-                className={`text-base mb-6 leading-relaxed ${
-                  darkMode ? "text-gray-300" : "text-gray-700"
-                }`}
-              >
-                &quot;{testimonial.content}&quot;
-              </blockquote>
-
-              {/* Author */}
-              <div className="flex items-center space-x-3">
-                <div
-                  className={`w-12 h-12 rounded-full flex items-center justify-center font-bold text-white ${
-                    darkMode ? "bg-blue-600" : "bg-blue-500"
-                  }`}
-                >
-                  {testimonial.name.charAt(0)}
-                </div>
-                <div>
-                  <div
-                    className={`font-semibold ${
-                      darkMode ? "text-white" : "text-gray-900"
-                    }`}
-                  >
-                    {testimonial.name}
-                  </div>
-                  <div
-                    className={`text-sm ${
-                      darkMode ? "text-gray-400" : "text-gray-600"
-                    }`}
-                  >
-                    {testimonial.role}
-                  </div>
-                  {testimonial.company && (
-                    <div
-                      className={`text-xs ${
-                        darkMode ? "text-blue-400" : "text-blue-600"
-                      }`}
-                    >
-                      {testimonial.company}
-                    </div>
-                  )}
-                </div>
+            ))}
+          </Marquee>
+          <Marquee reverse pauseOnHover className="[--duration:55s] gap-4 py-2">
+            {secondRow.map((testimonial, idx) => (
+              <div key={idx} className="mx-2">
+                <ReviewCard {...testimonial} />
               </div>
-            </motion.div>
-          ))}
+            ))}
+          </Marquee>
         </div>
       </div>
     </section>

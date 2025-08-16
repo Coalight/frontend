@@ -1,15 +1,15 @@
 import {
-  Users,
-  MessageSquare,
-  FileText,
   LucideIcon,
   BookOpenCheck,
   Bot,
   CalendarDays,
+  FileText,
   FolderKanban,
+  MessageSquare,
   Sparkles,
   TrendingUp,
   UploadCloud,
+  Users,
 } from "lucide-react";
 
 export interface Feature {
@@ -22,18 +22,14 @@ export interface Testimonial {
   name: string;
   role: string;
   content: string;
-  avatar: string;
-  rating: number;
-  company: string;
 }
-
 export interface Stat {
   value: string;
   label: string;
   description: string;
 }
 
-export const allFeatures: Feature[] = [
+export const features: Feature[] = [
   {
     icon: UploadCloud,
     title: "Upload Content",
@@ -95,69 +91,93 @@ export const allFeatures: Feature[] = [
       "Review all generated materials, make final adjustments, and export them in your desired format for distribution.",
   },
 ];
-
 export const testimonials: Testimonial[] = [
   {
-    name: "Sarah Johnson",
-    role: "High School Teacher",
-    company: "Lincoln High School",
+    name: "Sarah J.",
+    role: "Math Teacher",
     content:
-      "Coalight made remote teaching so much easier. My students are more engaged and organized than ever before. It's completely free and works perfectly!",
-    avatar: "/defaults/avatar.jpg",
-    rating: 5,
+      "Cut my lesson prep time in half while improving student outcomes. The perfect classroom assistant.",
   },
   {
-    name: "Michael Chen",
-    role: "College Student",
-    company: "State University",
+    name: "Mike C.",
+    role: "Physics Teacher",
     content:
-      "Finally, a platform that doesn't cost anything and actually works well. I can keep track of all my classes and assignments in one place.",
-    avatar: "/defaults/avatar.jpg",
-    rating: 5,
+      "Students actually look forward to my classes now. Engagement levels have never been higher.",
   },
   {
-    name: "Dr. Emma Davis",
+    name: "Emily R.",
+    role: "School Principal",
+    content:
+      "Our entire staff adopted it within weeks. The most seamless transition we've ever experienced.",
+  },
+  {
+    name: "James W.",
     role: "University Professor",
-    company: "Community College",
     content:
-      "I've tried many platforms, but Coalight is the most intuitive and user-friendly. My students adapted to it immediately, and it's 100% free.",
-    avatar: "/defaults/avatar.jpg",
-    rating: 5,
+      "Transformed how I deliver course material. Students retain information much more effectively.",
+  },
+  {
+    name: "Lisa T.",
+    role: "Special Ed Teacher",
+    content:
+      "Finally, a platform that truly understands diverse learning needs and accessibility requirements.",
+  },
+  {
+    name: "David P.",
+    role: "STEM Director",
+    content:
+      "We saw measurable improvements across all grade levels within just one semester of use.",
+  },
+  {
+    name: "Amina D.",
+    role: "Education Dean",
+    content:
+      "Now our standard recommendation for all incoming faculty. The gold standard in edtech.",
+  },
+  {
+    name: "Robert O.",
+    role: "IB Coordinator",
+    content:
+      "Works flawlessly across our international campuses. The multilingual support is exceptional.",
+  },
+  {
+    name: "Jen L.",
+    role: "Literacy Coach",
+    content:
+      "The most thoughtfully designed educational tool I've encountered in my 15-year career.",
+  },
+  {
+    name: "Miguel H.",
+    role: "Tech Admin",
+    content:
+      "Implementation was effortless, and the support team responded to all queries within hours.",
   },
 ];
 
 export const stats: Stat[] = [
   {
-    value: "50K",
-    label: "Active Users",
-    description: "Teachers & Students",
+    value: "150K+",
+    label: "Active Learners",
+    description: "Students worldwide",
   },
   {
-    value: "1100",
-    label: "Schools",
-    description: "Using Coalight",
+    value: "2,500+",
+    label: "Institutions",
+    description: "Universities & schools",
   },
-  { value: "100%", label: "Free Forever", description: "No hidden costs" },
-  { value: "24/7", label: "Available", description: "Always accessible" },
-];
-
-export const demoFeatures = [
-  "Create your first course",
-  "Add students to your class",
-  "Share learning materials",
-  "Create and grade assignments",
-  "Track student progress",
+  { value: "99.7%", label: "Uptime", description: "System reliability" },
+  { value: "45%", label: "Better Outcomes", description: "Improved grades" },
 ];
 
 export const footerLinks = {
-  product: ["Features", "How it works", "Templates", "Help Center", "Updates"],
-  resources: ["Getting Started", "Tutorials", "Community", "Blog", "Support"],
-  company: ["About", "Privacy", "Terms", "Contact", "Feedback"],
+  product: ["Features", "Pricing", "API", "Integrations", "Enterprise"],
+  resources: ["Documentation", "Tutorials", "Community", "Blog", "Support"],
+  company: ["About", "Careers", "Press", "Partners", "Contact"],
 };
 
 export const socialLinks = [
   { name: "twitter", href: "#" },
   { name: "github", href: "#" },
-  { name: "youtube", href: "#" },
+  { name: "linkedin", href: "#" },
   { name: "discord", href: "#" },
 ];

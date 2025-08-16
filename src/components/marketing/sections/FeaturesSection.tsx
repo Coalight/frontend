@@ -3,12 +3,12 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import { allFeatures } from "../data/marketing-data";
+import { features } from "../data/marketing-data";
 import { FeatureCard } from "../ui/FeatureCard";
 
 export default function FeaturesSection() {
   const [showAll, setShowAll] = useState(false);
-  const visibleFeatures = showAll ? allFeatures : allFeatures.slice(0, 4);
+  const visibleFeatures = showAll ? features : features.slice(0, 4);
 
   return (
     <section className="relative py-24 sm:py-32overflow-hidden bg-background">

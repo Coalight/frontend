@@ -6,8 +6,6 @@ import {
   FeaturesSection,
   StatsSection,
   TestimonialsSection,
-  DemoSection,
-  CTASection,
   Footer,
 } from "./marketing";
 import Navbar from "./basic/Navbar";
@@ -45,8 +43,6 @@ export default function LandingPage() {
       <StatsSection />
       <FeaturesSection />
       <TestimonialsSection />
-      <DemoSection />
-      <CTASection />
       <Footer />
     </div>
   );
