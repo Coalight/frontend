@@ -1,18 +1,21 @@
 import {
-  BookOpen,
   Users,
   MessageSquare,
-  Calendar,
   FileText,
-  BarChart3,
   LucideIcon,
+  BookOpenCheck,
+  Bot,
+  CalendarDays,
+  FolderKanban,
+  Sparkles,
+  TrendingUp,
+  UploadCloud,
 } from "lucide-react";
 
 export interface Feature {
+  icon: LucideIcon;
   title: string;
   description: string;
-  icon: LucideIcon;
-  stats: string;
 }
 
 export interface Testimonial {
@@ -30,48 +33,66 @@ export interface Stat {
   description: string;
 }
 
-export const features: Feature[] = [
+export const allFeatures: Feature[] = [
   {
+    icon: UploadCloud,
+    title: "Upload Content",
+    description:
+      "Begin by easily uploading your course materials, lecture notes, or any educational content in various formats.",
+  },
+  {
+    icon: Bot,
+    title: "AI-Powered Processing",
+    description:
+      "Our intelligent AI analyzes your content, identifying key concepts to structure it for optimal learning.",
+  },
+  {
+    icon: FileText,
+    title: "Generate Resources",
+    description:
+      "Instantly create quizzes, summaries, and lesson plans from your uploaded content with a single click.",
+  },
+  {
+    icon: BookOpenCheck,
     title: "Easy Course Creation",
     description:
-      "Create and organize courses effortlessly. Add materials, assignments, and resources with our simple drag-and-drop interface.",
-    icon: BookOpen,
-    stats: "5 min setup",
+      "Organize materials, assignments, and resources into comprehensive courses using a simple drag-and-drop interface.",
   },
   {
+    icon: Users,
     title: "Student Management",
     description:
-      "Manage student enrollments, track progress, and communicate with your class all in one place. Simple and effective.",
-    icon: Users,
-    stats: "Unlimited students",
+      "Manage enrollments, track individual progress, and communicate with your entire class all in one place.",
   },
   {
+    icon: MessageSquare,
     title: "Class Discussions",
     description:
-      "Foster engagement with built-in discussion forums, announcements, and real-time messaging for better collaboration.",
-    icon: MessageSquare,
-    stats: "Real-time chat",
+      "Foster engagement with built-in discussion forums, announcements, and real-time messaging for collaboration.",
   },
   {
+    icon: CalendarDays,
     title: "Assignment Scheduling",
     description:
-      "Schedule assignments, set due dates, and track submissions. Keep your class organized with our calendar system.",
-    icon: Calendar,
-    stats: "Smart reminders",
+      "Schedule assignments, set due dates, and track submissions to keep your class organized and on track.",
   },
   {
+    icon: FolderKanban,
     title: "Resource Sharing",
     description:
-      "Share documents, videos, links, and other learning materials. Support for all file types with cloud storage.",
-    icon: FileText,
-    stats: "5GB free storage",
+      "Share documents, videos, and links. Our cloud storage supports all major file types for easy access.",
   },
   {
+    icon: TrendingUp,
     title: "Progress Tracking",
     description:
-      "Monitor student progress with simple analytics. See who's participating and who might need extra help.",
-    icon: BarChart3,
-    stats: "Clear insights",
+      "Monitor student and class progress with simple analytics to see who is participating and who may need extra help.",
+  },
+  {
+    icon: Sparkles,
+    title: "Enhance & Export",
+    description:
+      "Review all generated materials, make final adjustments, and export them in your desired format for distribution.",
   },
 ];
 

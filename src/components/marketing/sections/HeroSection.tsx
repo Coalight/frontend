@@ -1,16 +1,19 @@
 "use client";
 
 import DarkVeil from "@/components/marketing/ui/DarkVeil";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 const randomHueShift = Math.floor(Math.random() * 360); // 0 - 360
 
 export default function HeroSection() {
+  const isMobile = useIsMobile();
+
   return (
     <section className="min-h-screen w-full  flex items-center justify-center p-6 relative bg-background">
       {/* bg design  */}
-      <DarkVeil speed={0.3} hueShift={randomHueShift} />
+      {!isMobile && <DarkVeil speed={0.3} hueShift={randomHueShift} />}
       <div className="max-w-4xl mx-auto text-center z-20">
         {/* Badge */}
         <motion.div

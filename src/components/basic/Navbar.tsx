@@ -69,7 +69,7 @@ export default function Navbar() {
           maxWidth: "calc(1280px - 40px)",
         }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className={`fixed z-50 rounded-full  border border-border/40 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/80  shadow-lg `}
+        className={`fixed z-50 rounded-full  border  border-gray-800 bg-background/95 backdrop-blur-sm   shadow-lg `}
       >
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           {/* Logo */}
