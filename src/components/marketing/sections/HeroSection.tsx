@@ -11,9 +11,13 @@ export default function HeroSection() {
   const isMobile = useIsMobile();
 
   return (
-    <section className="min-h-screen w-full  flex items-center justify-center p-6 relative bg-background">
+    <section
+      className="min-h-screen w-full  flex items-center justify-center p-6 relative bg-background"
+      id="top"
+    >
       {/* bg design  */}
       {!isMobile && <DarkVeil speed={0.3} hueShift={randomHueShift} />}
+
       <div className="max-w-4xl mx-auto text-center z-20">
         {/* Badge */}
         <motion.div

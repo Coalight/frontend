@@ -1,4 +1,4 @@
-import { Feature } from "../data/marketing";
+import { Feature } from "../data/marketing-data";
 
 interface FeatureCardProps {
   feature: Feature;

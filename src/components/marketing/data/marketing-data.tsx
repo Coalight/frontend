@@ -12,6 +12,8 @@ import {
   Users,
 } from "lucide-react";
 
+import { Twitter, Github, Linkedin, Mail } from "lucide-react";
+
 export interface Feature {
   icon: LucideIcon;
   title: string;
@@ -169,15 +171,44 @@ export const stats: Stat[] = [
   { value: "45%", label: "Better Outcomes", description: "Improved grades" },
 ];
 
-export const footerLinks = {
-  product: ["Features", "Pricing", "API", "Integrations", "Enterprise"],
-  resources: ["Documentation", "Tutorials", "Community", "Blog", "Support"],
-  company: ["About", "Careers", "Press", "Partners", "Contact"],
-};
+export const footerLinks = [
+  {
+    title: "Product",
+    links: ["Features", "Courses", "Pricing", "Templates", "Integrations"],
+  },
+  {
+    title: "Solutions",
+    links: ["Educators", "Students", "Universities", "Bootcamps", "Enterprise"],
+  },
+  {
+    title: "Resources",
+    links: ["Blog", "Webinars", "Guides", "Community", "Help Center"],
+  },
+  {
+    title: "Company",
+    links: ["About", "Careers", "Contact", "Press", "Legal"],
+  },
+];
 
 export const socialLinks = [
-  { name: "twitter", href: "#" },
-  { name: "github", href: "#" },
-  { name: "linkedin", href: "#" },
-  { name: "discord", href: "#" },
+  {
+    icon: <Twitter size={16} />,
+    color: "text-blue-400",
+    link: "https://x.com/i_am_sahed",
+  },
+  {
+    icon: <Github size={16} />,
+    color: "text-gray-700 dark:text-gray-300",
+    link: "https://github.com/coalight",
+  },
+  {
+    icon: <Linkedin size={16} />,
+    color: "text-blue-600",
+    link: "https://www.linkedin.com/in/sahedulislamrony",
+  },
+  {
+    icon: <Mail size={16} />,
+    color: "text-red-400",
+    link: "mailto:sahedul.dev@gmail.com",
+  },
 ];

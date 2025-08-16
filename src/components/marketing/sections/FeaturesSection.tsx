@@ -11,7 +11,10 @@ export default function FeaturesSection() {
   const visibleFeatures = showAll ? features : features.slice(0, 4);
 
   return (
-    <section className="relative py-24 sm:py-32overflow-hidden bg-background">
+    <section
+      className="relative py-24 sm:py-32 overflow-hidden bg-background"
+      id="features"
+    >
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 z-10">
         {/* Section Header */}
         <motion.div
