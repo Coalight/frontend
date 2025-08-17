@@ -147,7 +147,7 @@ The project uses a comprehensive design system built on:
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](./LICENSE).
 
 ## 🆘 Support
 
