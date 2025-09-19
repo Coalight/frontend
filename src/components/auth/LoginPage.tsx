@@ -16,25 +16,34 @@ import ORLine from "@/components/form/ORLine";
 import FormHeader from "@/components/form/FormHeader";
 import FooterTxt from "@/components/form/FooterTxt";
 import SubmitBtn from "@/components/form/SubmitBtn";
+import { ShineBorder } from "../ui/shine-border";
+import Background from "../marketing/ui/Background";
 
 export default function LoginPage() {
   return (
-    <div className="mx-auto max-w-md w-full mt-25 ">
-      <Card className=" shadow-sm  rounded-sm bg-transparent border-2 ">
-        <FormHeader
-          title="Welcome"
-          subTitle="Enter your credentials to continue"
-        />
+    <div className="flex  min-h-screen  w-full  justify-start p-6 md:p-10 z-50 items-center bg-background">
+      <Background />
 
-        <CardContent>
-          <MainForm />
+      <div className="mx-auto max-w-lg w-full ">
+        {/* <Background /> */}
 
-          <ORLine />
+        <Card className=" shadow-md border-1  rounded-lg bg-transparent  relative overflow-hidden ">
+          <ShineBorder duration={20} shineColor="#ff008078" />
+          <FormHeader
+            title="Welcome"
+            subTitle="Enter your credentials to continue"
+          />
 
-          <WithGoogleBtn />
-          <FooterTxt isFromLogin />
-        </CardContent>
-      </Card>
+          <CardContent>
+            <MainForm />
+
+            <ORLine />
+
+            <WithGoogleBtn />
+            <FooterTxt isFromLogin />
+          </CardContent>
+        </Card>
+      </div>
     </div>
   );
 }

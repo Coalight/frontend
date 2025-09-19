@@ -14,11 +14,15 @@ import FooterTxt from "@/components/form/FooterTxt";
 import WithGoogleBtn from "@/components/form/WithGoogleBtn";
 import FormHeader from "@/components/form/FormHeader";
 import SubmitBtn from "../form/SubmitBtn";
+import Background from "../marketing/ui/Background";
+import { ShineBorder } from "../ui/shine-border";
 
 export default function SignupPage() {
   return (
-    <div className="mx-auto max-w-md  mt-28 min-h-screen px-4 md:px-0">
-      <Card className="shadow-sm rounded-sm  bg-transparent border-2">
+    <div className="   min-h-screen px-4 md:px-0 bg-background flex items-center justify-center w-full">
+      <Background />
+      <Card className="shadow-md max-w-lg w-full rounded-lg  bg-transparent border-1 relative overflow-hidden">
+        <ShineBorder duration={20} shineColor="#ff008078" />
         <FormHeader title="Join Us" subTitle="Enter your details to sign up" />
 
         <CardContent>

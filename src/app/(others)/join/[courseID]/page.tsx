@@ -36,8 +36,14 @@ export default function CourseJoinPage() {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        toast.error(errorData.message || "Failed to join course");
+        const { error } = await response.json();
+        const { message, statusCode } = error;
+        if (statusCode === 409) {
+          toast.info("You are already enrolled in this course");
+          router.push(`/courses/${courseID}`);
+          return;
+        }
+        toast.error(message || "Failed to join course");
         return;
       }
 

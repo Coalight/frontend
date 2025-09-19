@@ -3,7 +3,7 @@
 import { useAppSelector } from "@/redux/hooks";
 import { selectUser } from "@/redux/features/auth/selectors";
 import { formatLongDate, getGreeting } from "@/lib/utils";
-import { CreateCourseModal, JoinCourseBtn } from "@/components/courses";
+import { CreateCourseModal } from "@/components/courses";
 
 export const Header = () => {
   const user = useAppSelector(selectUser);
@@ -21,7 +21,7 @@ export const Header = () => {
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <JoinCourseBtn />
+            {/* <JoinCourseBtn /> */}
             <CreateCourseModal />
           </div>
         </div>
