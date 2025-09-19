@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardContent } from "@/components/ui/card";
-import WithGoogleBtn from "@/components/form/WithGoogleBtn";
+// import WithGoogleBtn from "@/components/form/WithGoogleBtn";
 
 import { ChangeEvent, useState } from "react";
 import { FormState, LoginCredentials } from "@/types/auth";
@@ -39,7 +39,7 @@ export default function LoginPage() {
 
             <ORLine />
 
-            <WithGoogleBtn />
+            {/* <WithGoogleBtn /> */}
             <FooterTxt isFromLogin />
           </CardContent>
         </Card>

@@ -11,7 +11,7 @@ import { setUser } from "@/redux/features/auth/authSlice";
 import InputField from "@/components/form/InputField";
 import ORLine from "@/components/form/ORLine";
 import FooterTxt from "@/components/form/FooterTxt";
-import WithGoogleBtn from "@/components/form/WithGoogleBtn";
+// import WithGoogleBtn from "@/components/form/WithGoogleBtn";
 import FormHeader from "@/components/form/FormHeader";
 import SubmitBtn from "../form/SubmitBtn";
 import Background from "../marketing/ui/Background";
@@ -26,7 +26,7 @@ export default function SignupPage() {
         <FormHeader title="Join Us" subTitle="Enter your details to sign up" />
 
         <CardContent>
-          <WithGoogleBtn />
+          {/* <WithGoogleBtn /> */}
 
           <ORLine />
           <MainForm />
