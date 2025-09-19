@@ -28,7 +28,7 @@ export default function SignupPage() {
         <CardContent>
           {/* <WithGoogleBtn /> */}
 
-          <ORLine />
+          <ORLine text="JOIN" />
           <MainForm />
           <FooterTxt isFromLogin={false} />
         </CardContent>
